@@ -1,0 +1,2577 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WCP Weekly · Volume 1 · Issue 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600;1,8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+<style>
+/* WCP Weekly Newsletter — styles
+   Inspired by Onest (data-driven, candlestick green/red) but tuned for editorial email.
+   Default: warm-cream light theme. Tweakable: dark, accent.
+*/
+
+:root {
+  /* base palette */
+  --ink: #0A0D11;
+  --ink-2: #1A1F26;
+  --paper: #F7F5EF;            /* warm cream */
+  --paper-2: #ECE8DC;
+  --line: rgba(10,13,17,0.10);
+  --line-2: rgba(10,13,17,0.06);
+  --muted: rgba(10,13,17,0.55);
+  --muted-2: rgba(10,13,17,0.40);
+  /* accent (Onest) */
+  --green: #4FA855;            /* slightly muted vs raw #99EC72 for editorial */
+  --green-soft: #DCEFD2;
+  --yellow: #E8C547;
+  --yellow-soft: #FBF1C9;
+  --red: #D14545;
+  --red-soft: #F5D6D2;
+  --accent: var(--green);
+  /* typography */
+  --serif: "Source Serif 4", "Source Serif Pro", "Tiempos Text", Georgia, serif;
+  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:  "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+[data-theme="dark"] {
+  --ink: #ECE8DC;
+  --ink-2: #C9C5BA;
+  --paper: #0A0D11;
+  --paper-2: #14181E;
+  --line: rgba(236,232,220,0.12);
+  --line-2: rgba(236,232,220,0.06);
+  --muted: rgba(236,232,220,0.55);
+  --muted-2: rgba(236,232,220,0.40);
+  --green: #99EC72;
+  --green-soft: rgba(153,236,114,0.14);
+  --yellow: #FFF478;
+  --yellow-soft: rgba(255,244,120,0.14);
+  --red: #FF6E6E;
+  --red-soft: rgba(255,60,70,0.14);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #2B2E33;
+  font-family: var(--sans);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* === EMAIL CLIENT FRAME === */
+.client {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #1F2226;
+}
+
+.client-bar {
+  height: 44px;
+  background: #2B2E33;
+  border-bottom: 1px solid #15171A;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+  color: #C9C5BA;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.client-bar .lights { display: flex; gap: 6px; }
+.client-bar .lights span { width: 11px; height: 11px; border-radius: 50%; background: #555; }
+.client-bar .lights span:nth-child(1) { background: #FF5F57; }
+.client-bar .lights span:nth-child(2) { background: #FEBC2E; }
+.client-bar .lights span:nth-child(3) { background: #28C840; }
+.client-bar .crumb { color: #8A8780; margin-left: 18px; font-family: var(--mono); font-size: 11px; }
+.client-bar .grow { flex: 1; }
+.client-bar .icon { width: 14px; height: 14px; opacity: 0.55; }
+
+.client-toolbar {
+  height: 38px;
+  background: #25282D;
+  border-bottom: 1px solid #15171A;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+  font-size: 12px;
+  color: #B5B1A7;
+  flex-shrink: 0;
+}
+.client-toolbar .pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8A8780;
+}
+.client-toolbar .from { color: #ECE8DC; font-weight: 600; }
+.client-toolbar .subj { color: #C9C5BA; }
+
+.client-stage {
+  flex: 1;
+  overflow: auto;
+  padding: 24px 0;
+  background: linear-gradient(180deg, #1F2226 0%, #15171A 100%);
+}
+
+/* === EMAIL BODY === */
+.email {
+  width: 680px;
+  margin: 0 auto;
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6), 0 8px 20px -8px rgba(0,0,0,0.4);
+}
+
+/* === MASTHEAD === */
+.masthead {
+  padding: 32px 40px 24px;
+  border-bottom: 1.5px solid var(--ink);
+  position: relative;
+}
+.masthead .brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.masthead .brand-row .wcp-mark {
+  height: 18px;
+  width: auto;
+  display: block;
+  filter: invert(1) brightness(0);
+  flex-shrink: 0;
+}
+.masthead .brand-row .divider {
+  width: 1px;
+  height: 16px;
+  background: var(--line);
+}
+.masthead .brand-row .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+[data-theme="dark"] .masthead .brand-row .wcp-mark { filter: none; }
+.masthead .topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.masthead .logo {
+  font-family: var(--serif);
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+  color: var(--ink);
+  margin: 0;
+  font-style: italic;
+}
+.masthead .logo .wcp-mark {
+  height: 38px;
+  width: auto;
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 16px;
+}
+[data-theme="light"] .masthead .logo .wcp-mark {
+  filter: invert(1) brightness(0);
+}
+.masthead .logo .amp {
+  color: var(--accent);
+  font-style: normal;
+}
+.masthead .tagline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.masthead .tagline .tt { color: var(--ink); font-weight: 500; }
+
+/* MASTHEAD VARIANT: condensed all-caps */
+.masthead[data-style="condensed"] .logo {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 48px;
+  text-transform: uppercase;
+  font-stretch: condensed;
+}
+.masthead[data-style="stencil"] .logo {
+  font-family: var(--mono);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.masthead[data-style="stencil"] .logo .amp {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 0 8px;
+}
+
+/* === SECTION WRAPPER === */
+.section {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--line);
+}
+.section:last-child { border-bottom: 0; }
+.section.tight { padding: 18px 40px; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.eyebrow .num {
+  width: 22px; height: 22px;
+  background: var(--ink);
+  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.eyebrow .rule { flex: 1; height: 1px; background: var(--line); }
+.eyebrow .meta { color: var(--muted); font-weight: 500; }
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 8px 0 16px;
+  line-height: 1.1;
+}
+.section-title em { font-style: italic; color: var(--muted); font-weight: 400; }
+
+/* === BRIEF (editor's note) === */
+.brief-note {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.brief-note .drop {
+  font-weight: 700;
+  font-size: 56px;
+  float: left;
+  line-height: 0.85;
+  margin: 6px 8px -4px 0;
+  font-family: var(--serif);
+  color: var(--ink);
+}
+.brief-byline {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.brief-byline .sig { color: var(--ink); font-weight: 600; }
+
+/* === PULSE METRICS === */
+.pulse {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.pulse-cell {
+  padding: 14px 14px 12px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.pulse-cell:last-child { border-right: 0; }
+.pulse-cell .label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.pulse-cell .v {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.pulse-cell .delta {
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.delta.up    { color: var(--green); }
+.delta.down  { color: var(--red); }
+.delta.flat  { color: var(--muted); }
+
+/* === COMPETITOR CARDS === */
+.comp-list {
+  display: flex;
+  flex-direction: column;
+}
+.comp-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  align-items: flex-start;
+}
+.comp-row:first-child { border-top: 0; padding-top: 4px; }
+.comp-row:last-child { padding-bottom: 4px; }
+.comp-mono {
+  width: 44px; height: 44px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  position: relative;
+  flex-shrink: 0;
+}
+.comp-mono .nash {
+  position: absolute;
+  bottom: -4px; right: -4px;
+  width: 14px; height: 14px;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+}
+.comp-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.comp-meta .firm { color: var(--ink); font-weight: 700; letter-spacing: 0.04em; }
+.comp-meta .dot { width: 3px; height: 3px; background: var(--muted); border-radius: 50%; }
+.comp-meta .tag {
+  padding: 1.5px 6px;
+  border-radius: 2px;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+.tag.green { background: var(--green-soft); color: #1F5F2E; }
+.tag.yellow { background: var(--yellow-soft); color: #6B5108; }
+.tag.red { background: var(--red-soft); color: #6B1212; }
+[data-theme="dark"] .tag.green { color: var(--green); }
+[data-theme="dark"] .tag.yellow { color: var(--yellow); }
+[data-theme="dark"] .tag.red { color: var(--red); }
+.comp-meta .comp-tag-grey {
+  padding: 1.5px 6px;
+  border-radius: 2px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--line);
+  color: var(--muted);
+}
+[data-theme="dark"] .comp-meta .comp-tag-grey { color: var(--ink-2); }
+
+.comp-headline {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.comp-headline a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--accent), var(--accent)); background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 1px; }
+.comp-headline a:hover { background-size: 100% 2px; }
+.comp-source {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.comp-source a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.comp-source a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.comp-source .arrow { font-family: var(--sans); margin-left: 2px; }
+.comp-meta .firm a { color: inherit; text-decoration: none; }
+.comp-meta .firm a:hover { color: var(--accent); }
+
+/* Generic link styling for tables & lists */
+.ma-table a.target-link { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.ma-table a.target-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.ma-table a.src-link {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 1px 5px;
+  display: inline-block;
+}
+.ma-table a.src-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.news-row h4 a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--accent), var(--accent)); background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 1px; }
+.news-row h4 a:hover { background-size: 100% 2px; }
+.news-row .src a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.news-row .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.policy-row h5 a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--accent), var(--accent)); background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 1px; }
+.policy-row h5 a:hover { background-size: 100% 2px; }
+
+.event-row .name a { color: inherit; text-decoration: none; }
+.event-row .name a:hover { color: var(--accent); }
+
+.fund-card a.firm-link { color: var(--muted); text-decoration: none; }
+.fund-card a.firm-link:hover { color: var(--accent); }
+
+.watch-card .firm a { color: inherit; text-decoration: none; }
+.watch-card .firm a:hover { color: var(--accent); }
+.comp-detail {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.comp-date {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.comp-date .num { color: var(--ink); font-weight: 600; display: block; font-size: 13px; }
+
+/* compact mode */
+.email[data-density="compact"] .comp-row { padding: 10px 0; }
+.email[data-density="compact"] .section { padding: 22px 40px; }
+.email[data-density="compact"] .comp-headline { font-size: 15px; }
+
+/* === FUND CLOSES strip === */
+.funds-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 18px;
+}
+.fund-card {
+  border: 1px solid var(--line);
+  padding: 10px;
+  background: var(--paper);
+  position: relative;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.fund-card .firm {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fund-card .size {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.fund-card .name {
+  font-size: 11.5px;
+  color: var(--ink);
+  margin-top: 4px;
+  line-height: 1.25;
+}
+.fund-card .note {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.fund-card .accent {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+}
+
+/* === M&A TABLE === */
+.ma-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 8px;
+}
+.ma-table thead th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 8px 8px;
+  border-bottom: 1px solid var(--ink);
+  font-weight: 600;
+}
+.ma-table tbody td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.ma-table tbody tr:hover { background: var(--paper-2); }
+.ma-table .target { font-weight: 600; color: var(--ink); }
+.ma-table .sponsor { color: var(--muted); font-size: 11.5px; }
+.ma-table .num { font-family: var(--mono); font-size: 11.5px; text-align: right; }
+.ma-table .date { font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-transform: uppercase; }
+.ma-table .typ {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border: 1px solid var(--line);
+  display: inline-block;
+}
+.ma-table .typ.platform { border-color: var(--accent); color: var(--accent); background: var(--green-soft); }
+.ma-table .typ.exit { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+
+/* === SECTOR HEATMAP === */
+.heat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 8px;
+}
+.heat-row {
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 60px 80px 100px;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+  font-size: 12.5px;
+}
+.heat-row .name { font-weight: 500; }
+.heat-row .deals { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; }
+.heat-row .bar-wrap {
+  height: 6px;
+  background: var(--line-2);
+  position: relative;
+  border-radius: 1px;
+}
+.heat-row .bar {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 1px;
+}
+.heat-row.hot .bar { background: var(--accent); }
+.heat-row .wow {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: right;
+  font-weight: 600;
+}
+.heat-row .wow.up { color: var(--green); }
+.heat-row .wow.dn { color: var(--red); }
+.heat-row .wow.flat { color: var(--muted); }
+.heat-row.hot .name::after {
+  content: "● HOT";
+  font-family: var(--mono);
+  font-size: 8.5px;
+  color: var(--accent);
+  margin-left: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* === SPARK === */
+.spark-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.spark-block .label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.spark-block .val {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.spark-block .sub {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* === NEWS LIST === */
+.news-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  align-items: flex-start;
+}
+.news-row:first-child { border-top: 0; padding-top: 4px; }
+.news-row .tagcol {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink);
+  padding-top: 3px;
+  white-space: nowrap;
+}
+.news-row .tagcol::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+.news-row h4 {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 0 0 4px;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.news-row .src {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.news-row .src .read::before { content: "·"; margin: 0 5px; }
+.news-row .summary { font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+/* === POLICY === */
+.policy-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 96px;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  align-items: flex-start;
+}
+.policy-row:first-child { border-top: 0; padding-top: 2px; }
+.policy-row .agency {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4px 6px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.policy-row h5 {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 0 3px;
+  color: var(--ink);
+}
+.policy-row .note { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.policy-row .impact {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: right;
+  padding-top: 2px;
+  white-space: nowrap;
+}
+/* Category tags — describe what the policy DOES, not magnitude */
+.impact .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 4px; vertical-align: 1px; }
+
+/* Green = pro-deal-flow / pro-access */
+.impact.TAILWIND { color: var(--green); }
+.impact.TAILWIND .dot { background: var(--green); }
+
+/* Red = anti-deal-flow / contested */
+.impact.HEADWIND { color: var(--red); }
+.impact.HEADWIND .dot { background: var(--red); }
+.impact.LITIGATION { color: var(--red); }
+.impact.LITIGATION .dot { background: var(--red); }
+
+/* Blue = rulemaking / legislative — neither tail- nor head-wind by default */
+.impact.RULE,
+.impact[class*="STATE"],
+.impact.EXEC { color: #5B8FB9; }
+.impact.RULE .dot,
+.impact[class*="STATE"] .dot,
+.impact.EXEC .dot { background: #5B8FB9; }
+
+/* Yellow = compliance / reporting burden */
+.impact.OVERSIGHT { color: var(--yellow); }
+.impact.OVERSIGHT .dot { background: var(--yellow); }
+
+/* Backward compat for legacy HIGH/MEDIUM if any older entries remain */
+.impact.HIGH { color: var(--red); }
+.impact.HIGH .dot { background: var(--red); }
+.impact.MEDIUM { color: var(--yellow); }
+.impact.MEDIUM .dot { background: var(--yellow); }
+
+/* === EVENTS === */
+.events {
+  margin-top: 8px;
+  border: 1px solid var(--line);
+}
+.event-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px 90px;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12.5px;
+}
+.event-row:last-child { border-bottom: 0; }
+.event-row.attend { background: var(--green-soft); }
+[data-theme="dark"] .event-row.attend { background: var(--green-soft); }
+.event-row.consider { background: var(--yellow-soft); }
+[data-theme="dark"] .event-row.consider { background: var(--yellow-soft); }
+.event-row.consider .att { color: var(--ink); }
+.event-row .att .pip.consider { background: var(--yellow); }
+.event-row .date { font-family: var(--mono); font-size: 11px; font-weight: 600; }
+.event-row .name { font-weight: 500; line-height: 1.25; }
+.event-row .loc { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.event-row .att {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--muted);
+}
+.event-row.attend .att { color: var(--ink); }
+.event-row .att .pip {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: 1px;
+}
+.event-row .flag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1px 5px;
+  margin-left: 6px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  vertical-align: 1.5px;
+}
+
+/* === WATCHLIST === */
+.watch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+.watch-card {
+  border-left: 2px solid var(--accent);
+  padding: 8px 12px;
+  background: var(--paper-2);
+}
+.watch-card .firm {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.watch-card .firm .hq {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin-left: 6px;
+}
+.watch-card .reason { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* === FOOTER === */
+.foot {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 28px 40px;
+}
+[data-theme="dark"] .foot { background: #000; color: #ECE8DC; }
+.foot .foot-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(247,245,239,0.12);
+}
+.foot .wcp-mark-foot {
+  height: 22px;
+  width: auto;
+  display: block;
+  /* Logo is white — sits on dark footer naturally */
+}
+.foot .row1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0;
+  text-align: center;
+}
+.foot .logo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.foot .logo .wcp-mark-foot {
+  height: 18px;
+  width: auto;
+  display: inline-block;
+  vertical-align: -1px;
+  margin-right: 10px;
+}
+.foot .logo .amp { color: var(--accent); font-style: normal; }
+.foot .nav {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(247,245,239,0.6);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.foot .nav a { color: rgba(247,245,239,0.6); margin: 0; text-decoration: none; }
+.foot .nav a:hover { color: var(--accent); }
+.foot .body {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: rgba(247,245,239,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 16px;
+  border-top: 1px solid rgba(247,245,239,0.12);
+}
+
+/* === Two-column layout for split sections === */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* === Block quote / pull === */
+.pull {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 16px;
+  margin: 16px 0 0;
+  color: var(--ink);
+}
+.pull cite {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* === THEME TOGGLE === */
+.theme-toggle {
+  position: absolute;
+  top: calc(50% - 30px);
+  right: 40px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 78px;
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.theme-toggle:hover {
+  background: var(--paper);
+  border-color: var(--ink-2);
+}
+.theme-toggle .icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  line-height: 1;
+}
+@media print {
+  .theme-toggle { display: none; }
+}
+
+/* === VIEWPORT TOGGLE BUTTON === */
+.viewport-toggle {
+  position: absolute;
+  top: calc(50% + 4px);
+  right: 40px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 78px;
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.viewport-toggle:hover {
+  background: var(--paper);
+  border-color: var(--ink-2);
+}
+.viewport-toggle .icon {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+}
+@media print {
+  .viewport-toggle { display: none; }
+}
+
+/* === MOBILE PREVIEW MODE === */
+html[data-viewport="mobile"] body {
+  background: var(--paper-2);
+  padding: 24px 0;
+}
+html[data-viewport="mobile"] .client {
+  max-width: 390px;
+  margin: 0 auto;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 8px #1a1a1a, 0 0 0 9px #2a2a2a;
+  background: var(--paper);
+}
+html[data-viewport="mobile"] .client-bar,
+html[data-viewport="mobile"] .client-toolbar {
+  display: none;
+}
+html[data-viewport="mobile"] .client-stage {
+  padding: 0;
+  background: var(--paper);
+}
+html[data-viewport="mobile"] .email {
+  max-width: 100%;
+  margin: 0;
+  padding: 16px 14px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+html[data-viewport="mobile"] .section { padding: 18px 0; }
+html[data-viewport="mobile"] .section-title { font-size: 22px; line-height: 1.25; }
+
+/* Masthead — center logo, single-line topline + tagline */
+html[data-viewport="mobile"] .masthead {
+  padding: 22px 14px 14px;
+  text-align: center;
+}
+html[data-viewport="mobile"] .masthead h1.logo {
+  font-size: 28px;
+  text-align: center;
+  display: block;
+}
+html[data-viewport="mobile"] .masthead h1.logo .wcp-mark {
+  height: 22px;
+  margin-right: 8px;
+  vertical-align: -2px;
+}
+html[data-viewport="mobile"] .topline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  margin-bottom: 14px;
+}
+html[data-viewport="mobile"] .topline span { white-space: nowrap; }
+html[data-viewport="mobile"] .tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+html[data-viewport="mobile"] .tagline span { white-space: nowrap; }
+
+/* Eyebrow — keep meta on one line */
+html[data-viewport="mobile"] .eyebrow {
+  font-size: 9.5px;
+  gap: 6px;
+}
+html[data-viewport="mobile"] .eyebrow .num {
+  width: 18px; height: 18px;
+  font-size: 9px;
+}
+html[data-viewport="mobile"] .eyebrow span { white-space: nowrap; }
+html[data-viewport="mobile"] .eyebrow .rule { min-width: 0; }
+html[data-viewport="mobile"] .eyebrow .meta {
+  font-size: 8.5px;
+  flex-shrink: 0;
+}
+
+html[data-viewport="mobile"] .pulse {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+html[data-viewport="mobile"] .pulse-cell .v { font-size: 22px; }
+
+html[data-viewport="mobile"] .spark-block {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+html[data-viewport="mobile"] .comp-row {
+  grid-template-columns: 36px 1fr;
+  gap: 8px;
+}
+html[data-viewport="mobile"] .comp-date {
+  grid-column: 2 / -1;
+  text-align: left;
+  margin-top: 4px;
+  font-size: 10.5px;
+}
+html[data-viewport="mobile"] .comp-meta {
+  font-size: 10.5px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html[data-viewport="mobile"] .comp-headline { font-size: 14px; line-height: 1.35; }
+html[data-viewport="mobile"] .comp-detail { font-size: 12px; }
+
+/* Funds strip — 3-col × 2-row grid, no scrollbar */
+html[data-viewport="mobile"] .funds-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  overflow: visible;
+  padding-bottom: 0;
+  margin-top: 12px;
+}
+html[data-viewport="mobile"] .funds-strip .fund-card {
+  padding: 8px 6px;
+  min-width: 0;
+}
+html[data-viewport="mobile"] .fund-card .firm { font-size: 8.5px; margin-bottom: 2px; }
+html[data-viewport="mobile"] .fund-card .size { font-size: 16px; }
+html[data-viewport="mobile"] .fund-card .name { font-size: 10px; margin-top: 2px; line-height: 1.2; }
+html[data-viewport="mobile"] .fund-card .note { font-size: 8.5px; margin-top: 4px; line-height: 1.3; }
+
+html[data-viewport="mobile"] .heat-row {
+  grid-template-columns: 1fr 32px 60px;
+  gap: 6px;
+  font-size: 12px;
+}
+html[data-viewport="mobile"] .heat-row .bar-wrap {
+  display: none;
+}
+html[data-viewport="mobile"] .heat-row .wow {
+  font-size: 9.5px;
+  text-align: right;
+}
+
+html[data-viewport="mobile"] .heat-detail .ma-table {
+  font-size: 11px;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+html[data-viewport="mobile"] .heat-detail .ma-table th,
+html[data-viewport="mobile"] .heat-detail .ma-table td {
+  padding: 6px 8px;
+}
+
+html[data-viewport="mobile"] .news-row {
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+html[data-viewport="mobile"] .news-row .tagcol {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+html[data-viewport="mobile"] .news-row h4 { font-size: 14px; line-height: 1.3; }
+html[data-viewport="mobile"] .news-row .summary { font-size: 12px; }
+
+html[data-viewport="mobile"] .policy-row {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+html[data-viewport="mobile"] .policy-row .agency {
+  font-size: 10px;
+}
+html[data-viewport="mobile"] .policy-row .impact {
+  text-align: left;
+  margin-top: 4px;
+}
+html[data-viewport="mobile"] .policy-row h5 { font-size: 14px; line-height: 1.3; }
+
+/* Conferences — halve vertical size */
+html[data-viewport="mobile"] .events { margin-top: 4px; }
+html[data-viewport="mobile"] .event-row {
+  grid-template-columns: 56px 1fr;
+  gap: 4px 8px;
+  padding: 5px 8px;
+  font-size: 10.5px;
+}
+html[data-viewport="mobile"] .event-row .date { font-size: 9.5px; }
+html[data-viewport="mobile"] .event-row .name { font-size: 11px; line-height: 1.2; }
+html[data-viewport="mobile"] .event-row .loc,
+html[data-viewport="mobile"] .event-row .att {
+  grid-column: 2 / -1;
+  font-size: 9px;
+  margin-top: 0;
+}
+html[data-viewport="mobile"] .event-row .flag { font-size: 8px; padding: 0 4px; }
+
+html[data-viewport="mobile"] .foot .row1 {
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+html[data-viewport="mobile"] .foot .nav {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  font-size: 11px;
+}
+
+html[data-viewport="mobile"] .theme-toggle {
+  top: 14px;
+  right: 8px;
+  font-size: 10.5px;
+  padding: 4px 8px;
+}
+html[data-viewport="mobile"] .viewport-toggle {
+  top: 48px;
+  right: 8px;
+  font-size: 10.5px;
+  padding: 4px 8px;
+}
+
+@media (max-width: 480px) {
+  html:not([data-viewport="mobile"]) .client-bar,
+  html:not([data-viewport="mobile"]) .client-toolbar { display: none; }
+  html:not([data-viewport="mobile"]) .client { max-width: 100%; }
+}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// WCP Weekly Newsletter — Volume 1, Issue 2
+// Week of April 27 – May 1, 2026 (deal universe: 4/28–5/1, 4 briefs)
+// Sources: Healthcare Dealflow Daily Briefs (4/28, 4/29, 4/30, 5/1),
+// PitchBook export 2026-05-01 (Whistler Capital Partners search, last 7 days,
+// 73-firm competitor list), and WCP Master Tracker v6.
+
+window.NEWSLETTER_DATA = {
+  meta: {
+    issue: "Volume 1 · Issue 2",
+    week: "Week of April 27 – May 1, 2026",
+    edition: "Monday Edition",
+    sender: "WCP Research",
+    subject: "WCP Weekly · Vol 1 No 2: $15.1B HC week · 4 tracker prints · DSO platforms restructure",
+    sendDate: "2026-05-04",
+    ytd_deals: 1032,
+  },
+
+  // EDITOR'S NOTE — 3 paragraphs, signoff added by app.jsx
+  brief: [
+    "Healthcare M&A reverted to mean. $15.1B of disclosed capital across 9 of 42 deals — roughly half last week's $33.9B once-in-a-quarter pharma cluster. Strategics still carried: Arcellx/Gilead closed at $7.8B, Chiesi took KalVista private for $1.9B, ARCHIMED took Esperion private for up to $1.1B, and Teva paid up to $900M for Emalex. The week's cleanest editorial through-line was the DSO market: 4 dental DSO add-ons printed (Best Dental, Oak Tree Pediatric, Comella Orthodontics, Soto Dental) while DCA executed $1.1B+ of debt reduction under new lender control.",
+    "From the competitive funds to WCP: only four tracker firms moved this week — a marked deceleration from Issue 1's print. Heritage Group's Nationwide Medical platform added DHS in PA/NJ; Arsenal Capital's CareMetx — co-sponsored with General Atlantic and Epilog Partners — carved Cencora's US hub services, Lash Group, and TheraCom in a multi-entity transaction; WCAS cleared HSR antitrust review on its Select Medical take-private; and Blue Sea co-led a growth investment in Scout (clinical trial logistics).",
+    "Other developments, Welltower's C$4.1B acquisition of Amica's 38-community Canadian senior-living portfolio led on size. Tech-Enabled was the only hot sector — +50% week-over-week, with three of seven deals AI-named (Health Elements AI, Azra AI, 1520ai). Fund formation decelerated to $355M (Boyne BCM III, Miami) versus last week's $0.9B plus three firm launches. On policy, Maine signed HP1480/LD2201 — granting state DHHS approval authority over PE/HF/MSO healthcare transactions — the most material item this week for any LMM HC sponsor with a Northeast footprint.",
+  ],
+
+  // HEALTHCARE PE BY THE NUMBERS — pulse strip
+  // 9 of 42 deals disclosed; total $15.1B (inclusive of milestones/earnouts per Issue 1 precedent).
+  // FX assumption: C$1 = US$0.73 for Welltower/Amica conversion.
+  pulse: {
+    deals_wk:    { v: 42,        d: "HC deals announced this week",                          dir: "down" },
+    avg_ev:      { v: "$15.1B",  d: "9 of 42 disclosed",                                     dir: "down" },
+    median_mult: { v: "$900M",   d: "median deal size",                                                                  dir: "up"   },
+    fund_closes: { v: "$355M",   d: "1 close + 0 launches",                                                              dir: "down" },
+  },
+
+  // WHAT OUR PEERS DID — competitor activity, all verified against PitchBook + briefs
+  // 4 tracker firms moved (vs. 7 in Issue 1). All sourceUrl values are live press releases / publisher pages.
+  competitors: [
+    {
+      firm: "The Heritage Group",
+      hq: "Nashville, TN",
+      brand: "#2B5697",
+      headline: "Add-on: Nationwide Medical (Heritage portco) acquires DHS in PA/NJ",
+      type: "Add-on / LBO",
+      typeColor: "yellow",
+      date: "Apr 28, 2026",
+      detail: "Buyout/LBO add-on. Nationwide Medical — a Heritage Group portfolio company since late 2024 — acquires Dynamic Healthcare Services, a Pennsylvania- and New Jersey-based provider of home respiratory supplies, DME, and oxygen with clinical programs in OSA and COPD therapies. Deepens Nationwide's regional density and clinical programming in the Northeast. Amount undisclosed.",
+      tier: "Most Competitive",
+      sourceUrl: "https://www.hmenews.com/article/nationwide-medical-expands-reach-with-dhs-acquisition",
+      sourceName: "HME News, 4/28/26",
+      firmUrl: "https://heritagegroupusa.com/",
+    },
+    {
+      firm: "Arsenal Capital Partners",
+      hq: "New York, NY",
+      brand: "#2C3E50",
+      headline: "Add-on: CareMetx (Arsenal portco) acquires Cencora's US hub services + Lash Group + TheraCom",
+      type: "Add-on / Carve-out",
+      typeColor: "yellow",
+      date: "Apr 27, 2026",
+      detail: "Buyout/LBO carve-out add-on. CareMetx — co-sponsored by Arsenal Capital Partners, General Atlantic, and Epilog Partners — acquired Cencora's US hub consulting services operations, including Lash Group and TheraCom (free-goods pharmacy). Per CareMetx, the deal 'substantially increases operational scale and accelerates ability to serve an expanded portfolio of pharmaceutical brands and patient populations.' Acquired operations cover full-service hub, patient-access staffing infrastructure, and free-goods fulfillment. Amount undisclosed; PitchBook records 3 deal IDs for one transaction.",
+      tier: "Competitive",
+      sourceUrl: "https://www.caremetx.com/press-release/caremetx-acquires-u.s.-based-patient-services-and-free-goods-pharmacy-operations-from-cencora-significantly-expanding-its-patient-access-platform",
+      sourceName: "CareMetx press release, 4/28/26",
+      firmUrl: "https://www.arsenalcapital.com",
+    },
+    {
+      firm: "Welsh, Carson, Anderson & Stowe",
+      hq: "New York, NY",
+      brand: "#002F6C",
+      headline: "Take-private milestone: HSR clearance for Select Medical (NYSE: SEM) / WCAS XIV",
+      type: "Take-private",
+      typeColor: "yellow",
+      date: "Apr 27, 2026",
+      detail: "Process milestone on previously announced transaction, not a new deal. HSR Antitrust Improvements Act waiting period expired at 11:59 p.m. ET on April 27, 2026 for WCAS XIV LP's pending take-private of Select Medical Holdings Corp. (NYSE: SEM). Consortium led by Robert A. Ortenzio (Executive Chairman / Co-Founder) and Martin F. Jackson (SEVP, Strategic Finance & Operations). Antitrust clearance removes one of the gates to closing.",
+      tier: "Competitive",
+      sourceUrl: "https://za.investing.com/news/stock-market-news/select-medical-clears-antitrust-hurdle-for-wcas-buyout-deal-93CH-4238092",
+      sourceName: "Investing.com, 4/29/26",
+      firmUrl: "https://wcas.com/",
+    },
+    {
+      firm: "Blue Sea Capital",
+      hq: "West Palm Beach, FL",
+      brand: "#1F6FB0",
+      headline: "Co-leads growth investment in Scout (clinical trial logistics & meeting management)",
+      type: "Platform Investment",
+      typeColor: "green",
+      date: "Apr 30, 2026",
+      detail: "Growth investment co-led with Kolos Partners. Scout provides meeting management, travel, and logistics support to pharmaceutical, biotech, and medical device companies running clinical trials. BRG surfaced the investment via Blue Sea's portfolio-page update; BRG noted Blue Sea and Scout did not confirm details to BRG. Amount undisclosed.",
+      tier: "Competitive",
+      sourceUrl: "https://healthcaredealflow.com/blue-sea-capital-and-kolos-partners-make-growth-investment-in-scout/",
+      sourceName: "Healthcare Dealflow, 4/29/26",
+      firmUrl: "https://www.blueseacapital.com",
+    },
+  ],
+
+  // FUND CLOSES & FIRM LAUNCHES — 1 close, 0 launches (vs. 2 closes + 3 launches in Issue 1)
+  funds: [
+    {
+      firm: "Boyne Capital",
+      fund: "BCM Fund III",
+      size: "$355M",
+      date: "May 1, 2026",
+      note: "Miami LMM PE; oversubscribed at hard cap (target $275M); closed 90 days from launch. >$400M total commitments incl. parallel funds + GP commit; >10% from Boyne employees.",
+      homeUrl: "https://boynecapital.com/",
+      sourceUrl: "https://www.prnewswire.com/news-releases/boyne-capital-closes-oversubscribed-bcm-fund-iii-at-over-400-million-302759146.html",
+    },
+  ],
+
+  // Sector activity — week of 4/28-5/1/26 (4 briefs)
+  // 42 deals across 10 active sectors (Health Plans had 0). Tech-Enabled is the only hot
+  // sector this week (wow +50%, 7 deals) under the Issue 1 rule (wow >= +35% AND deals >= 5).
+  // Per H17: detail[] arrays capped at 10 items per sector.
+  // Disclosed values sum to $15.1B across 9 deals; median $900M. FX assumption: C$1 = US$0.73.
+  sectors: [
+    {
+      name: "Life Sciences & Related Services", deals: 10, share: 23.8, wow: -10, hot: false,
+      detail: [
+        { tgt: "Arcellx (NAS: ACLX)",                buyer: "Gilead Sciences (strategic)",   ev: "$7.8B",    note: "closing; $115/sh + $5 CVR",            date: "4/28",   type: "Strategic" },
+        { tgt: "KalVista Pharma. (NAS: KALV)",       buyer: "Chiesi Group (strategic)",      ev: "$1.9B",    note: "$27/sh take-private",                  date: "4/29",   type: "Take-private" },
+        { tgt: "Esperion Therapeutics (NAS: ESPR)",  buyer: "ARCHIMED",                      ev: "$1.1B",    note: "incl. milestones",                     date: "5/1",    type: "Take-private" },
+        { tgt: "Emalex Biosciences",                 buyer: "Teva Pharmaceuticals",          ev: "$700M+",   note: "+$200M earnouts; ecopipam",            date: "4/29",   type: "Strategic" },
+        { tgt: "Naveris (viral-mediated MRD dx)",    buyer: "CareDx",                        ev: "$160M+",   note: "+$100M revenue earnouts",              date: "4/29",   type: "Strategic" },
+        { tgt: "Cencora US Hub / Lash / TheraCom",   buyer: "CareMetx (Arsenal/GA/Epilog)",  ev: "Undisc.",  note: "carve-out from public Cencora",        date: "4/27",   type: "Carve-out" },
+        { tgt: "Scout (clinical trial logistics)",   buyer: "Blue Sea Capital + Kolos",      ev: "Undisc.",  note: "BRG-surfaced 4/29; closed early 2026", date: "Q1 '26", type: "Investment" },
+        { tgt: "Replay (HSV gene therapy)",          buyer: "LEO Pharma",                    ev: "Undisc.",  note: "rare derm; HSV vector",                date: "4/30",   type: "Strategic" },
+        { tgt: "Pharma Resource Group (PRG)",        buyer: "Pinnaql (3 Boomerang)",         ev: "Undisc.",  note: "3rd tuck-in in 10 mo.",                date: "4/30",   type: "Add-on" },
+        { tgt: "Noramco / Extractas / Purisys",      buyer: "Siegfried (from SK Capital)",   ev: "Undisc.",  note: "CDMO consol.; SK retains Halo",        date: "5/1",    type: "Exit" },
+      ],
+    },
+    {
+      name: "Facilities-Based Services", deals: 10, share: 23.8, wow: +15, hot: false,
+      detail: [
+        { tgt: "Amica Senior Lifestyles (38 commun.)", buyer: "Welltower (NYSE: WELL)",      ev: "C$4.1B",   note: "Canadian ports; closed 4/1",           date: "4/1",    type: "Strategic" },
+        { tgt: "MPT Q1 RE — 1 LTACH ID + 1 GAC TX",  buyer: "(sold by MPT)",                 ev: "$31M",     note: "+ €23M EU post-acute acq",             date: "Q1 '26", type: "Asset" },
+        { tgt: "Mercy Medical Center (182-bed, MA)", buyer: "Baystate Health",               ev: "Undisc.",  note: "from Trinity Health; def agmt",        date: "4/29",   type: "Strategic" },
+        { tgt: "Day Kimball Hospital (CT)",          buyer: "UConn Health",                  ev: "Undisc.",  note: "LOI (preliminary)",                    date: "4/29",   type: "LOI" },
+        { tgt: "Bristol Health (CT)",                buyer: "UConn Health",                  ev: "Undisc.",  note: "LOI (preliminary)",                    date: "4/29",   type: "LOI" },
+        { tgt: "Alliance Cancer Center (MS)",        buyer: "Delta Health System",           ev: "Undisc.",  note: "carve-out from Akumin",                date: "4/30",   type: "Strategic" },
+        { tgt: "Stone Manor MOB/ASC (62,750 SF, PA)", buyer: "Cornerstone Companies",        ev: "Undisc.",  note: "USPI/Tenet tenant; 9.8yr WALT",        date: "4/30",   type: "Asset" },
+        { tgt: "BGO 2 Orlando ASC RE (29,582 SF)",   buyer: "BGO Real Estate",               ev: "Undisc.",  note: "United Digestive/USPI tenant",         date: "5/1",    type: "Asset" },
+        { tgt: "Ensign 17 TX SNF/AL portfolio",      buyer: "The Ensign Group (NAS: ENSG)",  ev: "Undisc.",  note: "RE + ops; multi-property",             date: "5/1",    type: "Asset" },
+        { tgt: "Ensign 2 WI senior living",          buyer: "Standard Bearer (Ensign REIT)", ev: "Undisc.",  note: "Emerald Ridge + Anna's House",         date: "5/1",    type: "Asset" },
+      ],
+    },
+    {
+      name: "Tech-Enabled Services", deals: 7, share: 16.7, wow: +50, hot: true,
+      detail: [
+        { tgt: "Health Elements AI",                 buyer: "Medisolv",                      ev: "Undisc.",  note: "quality data abstraction AI",          date: "5/1",    type: "Add-on" },
+        { tgt: "RPM Technologies (life sci IT MSP)", buyer: "Corporate Technologies",        ev: "Undisc.",  note: "expands to 21 markets",                date: "5/1",    type: "Add-on" },
+        { tgt: "Reconciled (VMS billing SaaS)",      buyer: "LaborEdge",                     ev: "Undisc.",  note: "staffing-agency billing",              date: "5/1",    type: "Add-on" },
+        { tgt: "Hospice Analytics",                  buyer: "1520ai (simPAL Solutions)",     ev: "Undisc.",  note: "hospice-native AI",                    date: "4/29",   type: "Combination" },
+        { tgt: "JOYA Health (employer skin benefit)", buyer: "Aesthetic Record (EMR/PM)",    ev: "Undisc.",  note: "~40% F500 utilization",                date: "4/28",   type: "Strategic" },
+        { tgt: "Thynk Health (lung CA screening)",   buyer: "Azra AI (oncology workflow)",   ev: "Undisc.",  note: "imaging-driven care coord.",           date: "4/28",   type: "Strategic" },
+        { tgt: "ConsensioHealth (EM RCM)",           buyer: "Independent Emergency Phys.",   ev: "Undisc.",  note: "physician-aligned RCM",                date: "4/28",   type: "Investment" },
+      ],
+    },
+    {
+      name: "Physician Services", deals: 6, share: 14.3, wow: 0, hot: false,
+      detail: [
+        { tgt: "Playground Pediatrics multi-state",  buyer: "Playground Pediatrics",         ev: "Undisc.",  note: "4 add-ons GA/NC/PA/TN; sponsor n/d",   date: "4/28",   type: "Add-on" },
+        { tgt: "Best Dental (Richmond, TX)",         buyer: "Pearl Street Dental Partners",  ev: "Undisc.",  note: "DSO add-on",                           date: "4/28",   type: "Add-on" },
+        { tgt: "Copper Aesthetics (MI)",             buyer: "Cosmetic Physician Partners",   ev: "Undisc.",  note: "plastics PPM add-on",                  date: "4/29",   type: "Add-on" },
+        { tgt: "Oak Tree Pediatric Dentistry (SC)",  buyer: "Chord Specialty Dental Ptrs.",  ev: "Undisc.",  note: "DSO add-on; sponsor n/d",              date: "5/1",    type: "Add-on" },
+        { tgt: "Comella & Assoc. Ortho. (NY)",       buyer: "Vitana Pediatric & Ortho",      ev: "Undisc.",  note: "DSO add-on (ortho)",                   date: "5/1",    type: "Add-on" },
+        { tgt: "Soto Dental Partners (TX)",          buyer: "Heartland Dental",              ev: "Undisc.",  note: "DSO add-on",                           date: "5/1",    type: "Add-on" },
+      ],
+    },
+    {
+      name: "Outpatient Services", deals: 2, share: 4.8, wow: -40, hot: false,
+      detail: [
+        { tgt: "Intermountain Med Imaging (5 ctrs ID)", buyer: "RadNet + Saint Alphonsus JV", ev: "Undisc.", note: "RadNet majority; Trinity sys",         date: "5/1",    type: "JV" },
+        { tgt: "45 Joint Chiropractic clinics (CA)", buyer: "Elite Chiro Group",             ev: "$2.3M",    note: "from JYNT corp; APA",                  date: "4/28",   type: "Asset" },
+      ],
+    },
+    {
+      name: "Home-Based Services", deals: 2, share: 4.8, wow: +200, hot: false,
+      detail: [
+        { tgt: "Dynamic Healthcare Services (PA/NJ)", buyer: "Nationwide Medical (Heritage)", ev: "Undisc.", note: "home respiratory + DME add-on",        date: "4/28",   type: "Add-on" },
+        { tgt: "Chant Healthcare (OK)",              buyer: "Superior Health (Renovus)",     ev: "Undisc.",  note: "OK entry; home health + hospice",      date: "4/28",   type: "Add-on" },
+      ],
+    },
+    {
+      name: "Behavioral Health", deals: 2, share: 4.8, wow: 0, hot: false,
+      detail: [
+        { tgt: "5 facilities (CO/AR/KY/IN)",         buyer: "Landmark Recovery (from Sabra)", ev: "$52.5M", note: "court-approved settlement",            date: "4/28",   type: "Asset" },
+        { tgt: "Alma (mental health membership)",    buyer: "Spring Health (combination close)", ev: "Undisc.", note: "combined 170M+ lives globally",      date: "5/1",    type: "Combination" },
+      ],
+    },
+    {
+      name: "Medical Technology", deals: 1, share: 2.4, wow: -80, hot: false,
+      detail: [
+        { tgt: "Svelte Medical Systems",             buyer: "Advanced Bifurcation Sys (ABS)", ev: "Undisc.", note: "drug-eluting stents; FDA PMA + CE + PMDA", date: "4/28", type: "Asset" },
+      ],
+    },
+    {
+      name: "Professional Services", deals: 1, share: 2.4, wow: -25, hot: false,
+      detail: [
+        { tgt: "connectRN (PRN staffing)",           buyer: "SnapCare (merger)",             ev: "Undisc.",  note: "combined 500K+ clinicians",            date: "4/30",   type: "Merger" },
+      ],
+    },
+    {
+      name: "Suppliers & Logistics", deals: 1, share: 2.4, wow: -25, hot: false,
+      detail: [
+        { tgt: "Moss Medical LLC",                   buyer: "CME Corp.",                     ev: "Undisc.",  note: "3D CAD; HC equipment",                 date: "4/30",   type: "Strategic" },
+      ],
+    },
+    {
+      name: "Health Plans & Payor Services", deals: 0, share: 0.0, wow: -100, hot: false,
+      detail: [],
+    },
+  ],
+
+  // 12-week deal volume sparkline (last bar = this week, 42 deals)
+  // Rolled forward from Issue 1: dropped oldest (84), appended this week (42).
+  // Sum = 630, avg = ~53. Note: Issue 1's stated "~64" was a real math error
+  // (actual was 56) — Stage 8 audit logged for backward-looking review.
+  spark: [71, 97, 67, 42, 44, 46, 49, 43, 42, 16, 71, 42],
+
+  // News & Trends — week of 4/28-5/1/26
+  // 5 articles (under H17 cap of 10). All URLs verified by Jamie 5/2/26.
+  news: [
+    {
+      tag: "DSO",
+      title: "Why the DSO Boom May Be Over",
+      source: "Becker's Visionaries Memo",
+      briefDate: "Brief 5/1",
+      readTime: "5 min",
+      summary: "DCA + Affordable Care reportedly transitioned to lender control after restructuring challenges. Higher rates and operating-cost pressure are stressing LBO-funded DSO platforms; DCA executed a $1.1B+ debt reduction with $95M new capital and 2031 maturity extensions in the same week. Pair this with this week's 4 dental DSO add-ons (Best Dental, Oak Tree, Comella, Soto) — entry-level deals continuing while platforms restructure is the actual market signal.",
+      url: "https://www.beckersdental.com/dso-dpms/why-the-dso-boom-may-be-over/",
+      googleQuery: "\"DSO boom may be over\" Becker's Visionaries Memo DCA Affordable Care 2026",
+    },
+    {
+      tag: "TECH",
+      title: "AI Will Deliver Care to Billions and Break the System That Built It",
+      source: "PitchBook Analyst Note",
+      briefDate: "Brief 4/29",
+      readTime: "8 min",
+      summary: "Most strategically relevant analyst piece of the week for HCIT/Tech-Enabled thesis. 81% of US physicians now use AI in practice (2x in 3 years). PitchBook frames a 5-layer AI care delivery stack — foundation models → orchestration → ambient capture → workflow → care delivery platforms. Direct read for Abridge, EvidenceCare, LookDeep, and UnityAI; supports the +50% wow Tech-Enabled hot read this week.",
+      url: "https://pitchbook.brightspotcdn.com/e6/ac/e2c1a7384c3c8d6b2516b32c4528/q2-2026-ai-will-deliver-care-to-billions-and-break-the-system-that-built-it.pdf",
+      googleQuery: "PitchBook \"AI care delivery\" analyst note 5-layer stack 2026",
+    },
+    {
+      tag: "M&A",
+      title: "Q1 2026 Healthtech VC: $4.6B raised (+25% YoY) but exits collapse −67%",
+      source: "PitchBook Q1 2026 Healthtech Report",
+      briefDate: "Brief 5/1",
+      readTime: "6 min",
+      summary: "Deal count up +35.5% YoY; median pre-money $32.5M (vs $22M two years ago); venture-growth median $1.4B (record). But exits are −43.6% by count and −67.2% by value YoY; Veritas/GHX $5B was the top exit. Quantifies the contradiction we're seeing in 2026: AI-driven primary funding stays strong while the liquidity engine grinds. Calibration check for any 2026 fund-deployment thesis assuming exits.",
+      url: "https://pitchbook.com/news/reports/q1-2026-healthtech-vc-trends",
+      googleQuery: "PitchBook \"Q1 2026 Healthtech VC\" report \"$4.6B\" exits",
+    },
+    {
+      tag: "STRATEGY",
+      title: "A Look at Sheridan Capital's Value-Creation Approach to Backing Healthcare Companies",
+      source: "Markets Group",
+      briefDate: "Brief 4/28",
+      readTime: "6 min",
+      summary: "Direct profile of a 73-firm-tracker peer. ~40 employees, roughly half in operations / business development; 10-year track record. Quotable framing on \"buy-build-and-manage\" approach to lower-middle-market HC services. Useful internal reference point for WCP value-creation discipline; also a window into how a peer tells its story to LPs.",
+      url: "https://www.marketsgroup.org/news/a-look-at-sheridan-capitals-value-creation-approach-to-backing-healthcare-companies",
+      googleQuery: "Sheridan Capital Partners \"Sean Dempsey\" \"Jonathan Lewis\" Markets Group profile 2026",
+    },
+    {
+      tag: "PPM",
+      title: "How Ancillary Services Are Increasing Healthcare Practice Valuations",
+      source: "Bloom Healthcare Advisors",
+      briefDate: "Brief 4/29",
+      readTime: "4 min",
+      summary: "Buyers now anchor on ancillary-EBITDA durability rather than physician productivity. Direct read for any PPM/MSO buyer evaluating practice valuations — the playbook is shifting from headcount-rollup math to ancillary-mix math. Calibrates how to underwrite the 4 dental DSO add-ons and Playground Pediatrics multi-state expansion this week.",
+      url: "https://bloomllc.com/how-ancillary-services-are-increasing-healthcare-practice-valuations/",
+      googleQuery: "\"ancillary services\" \"practice valuations\" Bloom Healthcare Advisors 2026",
+    },
+  ],
+
+  // Portfolio Watch — 3 entries (deliberately under cap; 3 strong > 4 weak).
+  // summaryHTML rendered with dangerouslySetInnerHTML — keep markup limited to <strong>, <em>.
+  portfolio: [
+    {
+      tag: "UNITYAI",
+      title: "UnityAI builds out agentic AI for staffing and labor operations to keep pace with patient demand",
+      source: "FierceHealthcare",
+      url: "https://www.fiercehealthcare.com/ai-and-machine-learning/unityai-builds-out-agentic-ai-staffing-operations-keep-pace-patient-demand",
+      summaryHTML: "<strong>Direct: UnityAI.</strong> Direct product / strategy coverage of the WCP strategic investment. Frames UnityAI's positioning in agentic-AI-for-staffing — the cleanest 2026 build category per PitchBook's 5-layer AI care-delivery analyst note (also this issue, News). Confirms continued public-profile build ahead of next funding event.",
+    },
+    {
+      tag: "RAD PARTNERS",
+      title: "RadNet & Saint Alphonsus Health System form 5-center JV in Boise; RadNet acquires majority equity in Intermountain Medical Imaging",
+      source: "RadNet press release, 5/1",
+      url: "https://www.radnet.com/about-radnet/news/radnet-saint-alphonsus-joint-venture",
+      summaryHTML: "<strong>Direct competitor signal: Radiology Partners.</strong> RadNet's third health-system JV in three quarters (Long Island, NJ, now Idaho) — a sustained model differentiation from Rad Partners' traditional MSO/PPM build.",
+    },
+    {
+      tag: "GXP-STORAGE",
+      title: "Pharma services consolidation accelerates: Noramco/Siegfried (CDMO) and PRG/Pinnaql (formulation) print same week",
+      source: "BusinessWire (SK Capital release, 5/1) + BRG Daily Brief, 4/30",
+      url: "https://www.businesswire.com/news/home/20260501338050/en/SK-Capital-Partners-Completes-Sale-of-Noramco-Extractas-Biosciences-and-Purisys-to-Siegfried-Holding-AG",
+      summaryHTML: "<strong>Direct: GXP-Storage.</strong> Two pharma-services tuck-ins this week (Noramco/Extractas/Purisys → Siegfried from SK Capital; PRG → Pinnaql by 3 Boomerang) reinforce the CDMO / pharma-services consolidation theme that GXP-Storage's tech-enabled regulated-material-management platform is positioned against. Each transaction is small individually but together signal continued sponsor-led roll-up activity in the adjacencies — supportive of GXP's biostorage thesis.",
+    },
+  ],
+
+  // Policy & Regulation — week of 4/28-5/1/26
+  // 5 entries (at H17 cap). impact field = category tag (per Issue 1 convention).
+  // Note: "INSURERS" tag is non-canonical (not in CMS/FDA/FTC/etc. list) but accurate
+  // for an industry-led standard; .agency CSS is text styling only, no per-tag CSS.
+  policy: [
+    {
+      agency: "STATE (ME)",
+      title: "Maine HP1480 / LD2201 — PE/Hedge Fund/MSO transaction approval law signed",
+      impact: "STATE LAW",
+      note: "Governor Mills signed 4/13/26. Maine DHHS gets approval authority over healthcare transactions involving private equity, hedge funds, and certain MSOs. Implements 14 commission recommendations from the Dec 2025 final report. Adds Maine to the small but growing club of states (CA, OR, WA, IN) with PE-disclosure / approval regimes — most material item this week for any LMM HC tracker firm operating in or expanding into the Northeast.",
+      briefDate: "Brief 4/30",
+      url: "https://www.foley.com/insights/publications/2026/04/maine-health-care-transactions-new-state-approvals-involving-some-private-equity-hedge-funds-and-msos/",
+      googleQuery: "Maine \"HP1480\" \"LD2201\" \"private equity\" healthcare transaction approval Mills 2026",
+    },
+    {
+      agency: "INSURERS",
+      title: "UHG, Humana, Aetna align prior-auth requirements (effective 1/1/27)",
+      impact: "TAILWIND",
+      note: "Single data-submission standard for orthopedic surgery, CT, and MRI prior auth across commercial / Medicare / Medicaid lines. Coordinated through CAQH; >50 insurers participating; >250M lives in scope. First step toward immediate-electronic prior-auth answers. Material admin-friction reduction tailwind for any provider, RCM, or PPM platform — accelerates time-to-cash and reduces denials cost.",
+      briefDate: "Brief 4/27",
+      url: "https://www.fiercehealthcare.com/payers/unitedhealthcare-aetna-tout-progress-standardize-prior-authorization-part-industry-wide",
+      googleQuery: "UnitedHealth Humana Aetna \"prior authorization\" alignment CAQH January 2027",
+    },
+    {
+      agency: "CONGRESS",
+      title: "OBBBA Medicaid home-care eligibility cuts: −311,879 enrollees by 2034 (−9.4%)",
+      impact: "HEADWIND",
+      note: "National Alliance for Care at Home + Research Institute for Home Care 2026 chartbook quantifies the One Big Beautiful Bill Act's Medicaid home-care eligibility tightening. 311,879 fewer Medicaid HC recipients projected by 2034 (−9.4% national reduction). Direct headwind for home-health and Medicaid-skewed hospice operators; sponsors with home-based theses should re-stress payor-mix sensitivities.",
+      briefDate: "Brief 4/30",
+      url: "https://www.mcknightshomecare.com/news/over-300k-home-care-recipients-could-lose-medicaid-coverage-by-2034-report-finds/",
+      googleQuery: "\"National Alliance for Care at Home\" 2026 chartbook OBBBA Medicaid home care 311,879",
+    },
+    {
+      agency: "FDA",
+      title: "FDA launches AI-monitored real-time clinical trial review (POC)",
+      impact: "TAILWIND",
+      note: "Proof-of-concept on AstraZeneca's lymphoma drug and Amgen's small-cell lung cancer drug. Positions US trial review against China's faster timelines. If POC scales, could compress drug-development timelines materially — incremental tailwind for life-sciences tools, CDMO, and CRO sponsors with biopharma exposure (relevant to GXP-Storage's pharma services thesis and the Noramco/PRG consolidation reads above).",
+      briefDate: "Brief 4/29",
+      url: "https://www.fda.gov/news-events/press-announcements/fda-announces-major-steps-implement-real-time-clinical-trials",
+      googleQuery: "FDA \"AI\" \"real-time\" clinical trial review POC AstraZeneca Amgen 2026",
+    },
+    {
+      agency: "CONGRESS",
+      title: "House Ways & Means hearing — site-neutral payment rework",
+      impact: "OVERSIGHT",
+      note: "Health-system CEOs at 4-hour hearing agreed to \"rational reworking\" of site-neutral payments — a softening of prior outright opposition. Republican members criticized 340B subsidies; Democrats focused on OBBBA repeals. No bill text yet, but the tone shift is the signal. Hospital reimbursement risk worth pricing into any acute-care or hospital-affiliated thesis (relevant to UConn LOIs, Mercy/Baystate, and Select Medical take-private).",
+      briefDate: "Brief 4/30",
+      url: "https://www.fiercehealthcare.com/providers/capitol-hill-health-system-ceos-agree-rational-reworking-site-neutral-payments",
+      googleQuery: "House Ways and Means \"site-neutral\" hearing health system CEOs April 2026",
+    },
+  ],
+
+  // WHERE TO BE SEEN — 10 events (at H17 cap), May 12 – May 21 cluster
+  // All URLs verified by Jamie 5/2/26.
+  events: [
+    { name: "Houlihan Lokey ONE Global Conference (Healthcare day: May 13)", date: "May 12–14", loc: "New York, NY (NY Marriott Marquis)", attend: false,
+      url: "https://hl.com/about-us/events/" },
+    { name: "American Telemedicine Association NEXUS 2026", date: "May 12–14", loc: "Orlando, FL", attend: false,
+      url: "https://www.americantelemed.org/events/23619/" },
+    { name: "Polsinelli 19th Annual Healthcare Dealmakers Conference", date: "May 13–14", loc: "Dallas, TX", attend: false,
+      url: "https://www.polsinelli.com/events/healthcare-dealmakers-conference" },
+    { name: "Autism Investor Summit", date: "May 13–15", loc: "Scottsdale, AZ", attend: false,
+      url: "https://autisminvestorsummit.com/" },
+    { name: "Ambulatory Surgery Center Association (ASCA) Annual Conference", date: "May 13–16", loc: "Washington, DC", attend: false,
+      url: "https://www.ascassociation.org/annualconference/home" },
+    { name: "AGC 2026 HCIT & Life Sciences Technology Summit", date: "May 14", loc: "Nashville, TN", attend: false, flag: "HOME",
+      url: "https://www.agcpartners.com/events/agcs-hcit-life-sciences-technology-summit" },
+    { name: "Financial Times US Pharma and Biotech Summit", date: "May 14", loc: "New York, NY", attend: false,
+      url: "https://uspharma.live.ft.com/" },
+    { name: "MedCity INVEST", date: "May 20–21", loc: "Chicago, IL", attend: false,
+      url: "https://medcityinvestconference.com/" },
+    { name: "Reuters Events: Digital Health 2026", date: "May 20–21", loc: "Chicago, IL", attend: false,
+      url: "https://1.reutersevents.com/LP=39186?extsource=website" },
+    { name: "McDermott HealthEx 2026", date: "May 20–21", loc: "Nashville, TN", attend: true, flag: "HOME",
+      url: "https://web.cvent.com/event/744af929-81e8-45bc-861d-e750dca39134/-1-1" },
+  ],
+
+  // WATCHLIST — firms to keep a closer eye on next 30 days, based on this week's signals
+  watchlist: [
+    { firm: "The Heritage Group", hq: "Nashville", reason: "Most active tracker firm this week. Nationwide Medical platform added DHS in PA/NJ; building density in Northeast home respiratory/DME. Watch for further regional add-ons.",
+      url: "https://heritagegroupusa.com/" },
+    { firm: "Arsenal Capital Partners", hq: "New York", reason: "CareMetx multi-entity Cencora carve-out was the largest tracker print of the week. Watch for follow-on patient-services bolt-ons to round out the platform.",
+      url: "https://www.arsenalcapital.com" },
+    { firm: "Welsh, Carson, Anderson & Stowe", hq: "New York", reason: "HSR clearance on Select Medical take-private removes one gate to closing. Watch for SEC filings around shareholder vote and closing timeline.",
+      url: "https://wcas.com/" },
+    { firm: "Blue Sea Capital", hq: "West Palm Beach", reason: "Co-led Scout growth investment with Kolos Partners; single-source disclosure flagged. Watch for confirmation and follow-on activity in life-sciences services.",
+      url: "https://www.blueseacapital.com" },
+  ],
+};
+</script>
+<script type="text/babel">
+
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel"
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+function TweakColor({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <input type="color" className="twk-swatch" value={value}
+             onChange={(e) => onChange(e.target.value)} />
+    </div>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+</script>
+<script type="text/babel">
+/* global React, ReactDOM */
+const { useState, useEffect } = React;
+const e = React.createElement;
+
+const WCP_LOGO_SRC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWsAAAA9CAMAAABcOLgUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAAP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wc9CwgAAAEAdFJOUwADAQdiPSxRSxsIQkw4AihNFgZPNRVHFykjRnegnp96NhEaLTwJKjsiE7p9//iBN/7a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';
+
+function initials(name) {
+  return name.split(/\s+/).filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+function ThemeToggle() {
+  const [theme, setTheme] = React.useState(
+    typeof document !== 'undefined' ? (document.documentElement.getAttribute('data-theme') || 'dark') : 'dark'
+  );
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    setTheme(next);
+  };
+  return e('button', {
+      className: 'theme-toggle',
+      onClick: toggle,
+      'aria-label': `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`,
+      title: `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`,
+    },
+    e('span', { className: 'icon' }, theme === 'dark' ? '☀' : '☾'),
+    e('span', null, theme === 'dark' ? 'Light' : 'Dark')
+  );
+}
+
+function ViewportToggle() {
+  const [viewport, setViewport] = React.useState(
+    typeof document !== 'undefined' ? (document.documentElement.getAttribute('data-viewport') || 'desktop') : 'desktop'
+  );
+  const toggle = () => {
+    const next = viewport === 'desktop' ? 'mobile' : 'desktop';
+    document.documentElement.setAttribute('data-viewport', next);
+    setViewport(next);
+  };
+  return e('button', {
+      className: 'viewport-toggle',
+      onClick: toggle,
+      'aria-label': `Switch to ${viewport === 'desktop' ? 'mobile' : 'desktop'} preview`,
+      title: `Switch to ${viewport === 'desktop' ? 'mobile' : 'desktop'} preview`,
+    },
+    e('span', { className: 'icon' }, viewport === 'desktop' ? '📱' : '🖥'),
+    e('span', null, viewport === 'desktop' ? 'Mobile' : 'Desktop')
+  );
+}
+
+function App() {
+  const D = window.NEWSLETTER_DATA;
+
+  const [tw, setTweak] = useTweaks(/*EDITMODE-BEGIN*/{
+    "theme": "dark",
+    "accent": "#4FA855",
+    "density": "comfortable",
+    "masthead": "serif"
+  }/*EDITMODE-END*/);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = tw.theme;
+    root.style.setProperty('--accent', tw.accent);
+  }, [tw.theme, tw.accent]);
+
+  return e('div', { className: 'client' },
+    e(ClientChrome, null),
+    e('div', { className: 'client-stage' },
+      e('article', { className: 'email', 'data-density': tw.density },
+        e(Masthead, { meta: D.meta, style: tw.masthead }),
+        e(Brief, { brief: D.brief }),
+        e(PulseSection, { pulse: D.pulse, spark: D.spark, funds: D.funds }),
+        e(CompetitorSection, { competitors: D.competitors }),
+        e(SectorSection, { sectors: D.sectors }),
+        e(NewsSection, { news: D.news, portfolio: D.portfolio }),
+        e(PolicySection, { policy: D.policy }),
+        e(EventsSection, { events: D.events }),
+        e(Footer, null),
+      )
+    ),
+    e(TweaksUI, { tw, setTweak })
+  );
+}
+
+function ClientChrome() {
+  return e(React.Fragment, null,
+    e('div', { className: 'client-bar' },
+      e('div', { className: 'lights' }, e('span'), e('span'), e('span')),
+      e('div', { className: 'crumb' }, 'Inbox — WCP Research'),
+      e('div', { className: 'grow' }),
+      e('div', { className: 'crumb' }, 'Mon · May 4, 2026 · 7:00 AM CT')
+    ),
+    e('div', { className: 'client-toolbar' },
+      e('span', { className: 'pill' }, 'Reply'),
+      e('span', { className: 'pill' }, 'Forward'),
+      e('span', { className: 'pill' }, 'Archive'),
+      e('div', { className: 'grow' }),
+      e('span', null, e('span', { className: 'from' }, 'WCP Research'), ' · ', e('span', { className: 'subj' }, 'WCP Weekly · Volume 1 · Issue 2'))
+    )
+  );
+}
+
+function Masthead({ meta, style }) {
+  return e('header', { className: 'masthead', 'data-style': style, 'data-screen-label': 'Masthead' },
+    e(ThemeToggle, null),
+    e(ViewportToggle, null),
+    e('div', { className: 'topline' },
+      e('span', null, meta.issue),
+      e('span', null, meta.edition),
+      e('span', null, meta.week)
+    ),
+    e('h1', { className: 'logo' },
+      e('a', { href: 'https://www.whistlercapital.com/', target: '_blank', rel: 'noopener', 'aria-label': 'Whistler Capital Partners' },
+        e('img', { src: WCP_LOGO_SRC, alt: 'WCP', className: 'wcp-mark' })
+      ),
+      'WCP ', e('span', { className: 'amp' }, 'Weekly')
+    ),
+    e('div', { className: 'tagline' },
+      e('span', { className: 'tt' }, 'Healthcare Private Equity · Nashville, TN'),
+      e('span', null, 'Competitive Intel · M&A · Policy · Events')
+    )
+  );
+}
+
+function Brief({ brief }) {
+  return e('section', { className: 'section', 'data-screen-label': 'Brief' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '01'),
+      e('span', null, 'The Brief'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, '2 min read')
+    ),
+    e('h2', { className: 'section-title' }, 'A ', e('em', null, 'quieter'), ' week — 4 competitor prints, 1 fund close.'),
+    (Array.isArray(brief) ? brief : [brief]).map((para, i) =>
+      e('p', { key: i, className: 'brief-note', style: i > 0 ? { marginTop: 14, clear: 'both' } : null },
+        i === 0 ? e('span', { className: 'drop' }, para[0]) : null,
+        i === 0 ? para.slice(1) : para
+      )
+    ),
+    e('div', { className: 'brief-byline' },
+      e('span', { className: 'sig' }, '— WCP Research Team')
+    )
+  );
+}
+
+function PulseSection({ pulse, spark, funds }) {
+  const max = Math.max(...spark);
+  const min = Math.min(...spark);
+  const w = 280, h = 60;
+  const pts = spark.map((v, i) => {
+    const x = (i / (spark.length - 1)) * w;
+    const y = h - ((v - min) / (max - min)) * h;
+    return [x, y];
+  });
+  const path = pts.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(' ');
+  const area = path + ` L${w},${h} L0,${h} Z`;
+
+  return e('section', { className: 'section', 'data-screen-label': 'Pulse' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '02'),
+      e('span', null, 'The Pulse'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, 'Apr 28–May 1 · 4 briefs · 1 fund close')
+    ),
+    e('h2', { className: 'section-title' }, 'Healthcare PE, ', e('em', null, 'by the numbers')),
+    e('div', { className: 'pulse' },
+      e(PulseCell, { label: 'Deals Tracked', v: pulse.deals_wk.v, d: pulse.deals_wk.d, dir: pulse.deals_wk.dir }),
+      e(PulseCell, { label: 'Capital Announced', v: pulse.avg_ev.v, d: pulse.avg_ev.d, dir: pulse.avg_ev.dir }),
+      e(PulseCell, { label: 'Median Deal Size', v: pulse.median_mult.v, d: pulse.median_mult.d, dir: pulse.median_mult.dir }),
+      e(PulseCell, { label: 'Fund Capital', v: pulse.fund_closes.v, d: pulse.fund_closes.d, dir: pulse.fund_closes.dir })
+    ),
+    e('div', { className: 'spark-block' },
+      e('div', null,
+        e('div', { className: 'label' }, '12-week deal volume'),
+        e('div', { className: 'val' }, '42 ', e('span', { style: { fontSize: 14, color: 'var(--muted)' } }, 'this wk')),
+        e('div', { className: 'sub' }, 'Trailing 12-wk avg: ~53')
+      ),
+      e('svg', { viewBox: `0 0 ${w} ${h}`, width: '100%', height: h, preserveAspectRatio: 'none' },
+        e('path', { d: area, fill: 'var(--accent)', opacity: 0.12 }),
+        e('path', { d: path, fill: 'none', stroke: 'var(--accent)', strokeWidth: 1.5 }),
+        ...pts.map((p, i) =>
+          e('circle', { key: i, cx: p[0], cy: p[1], r: i === pts.length - 1 ? 3 : 0, fill: 'var(--accent)' })
+        )
+      )
+    ),
+    funds && funds.length > 0 && e(CapitalFormation, { funds })
+  );
+}
+
+function CapitalFormation({ funds }) {
+  const single = funds.length === 1;
+  return e('div', { style: { marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--line)' } },
+    e('div', { className: 'eyebrow', style: { marginBottom: 0 } },
+      e('span', null, 'Capital Formation'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, '$355M announced + 0 launches')
+    ),
+    e('div', { className: 'funds-strip', style: single ? { gridTemplateColumns: '1fr', gap: 0 } : null },
+      funds.map((f, i) =>
+        e('div', {
+          key: i,
+          className: 'fund-card',
+          style: single ? { display: 'grid', gridTemplateColumns: 'auto auto 1fr auto', alignItems: 'baseline', columnGap: 18, padding: '14px 16px' } : null,
+        },
+          e('div', { className: 'accent' }),
+          e('div', { className: 'firm', style: single ? { whiteSpace: 'nowrap', marginBottom: 0 } : null },
+            e('a', { className: 'firm-link', href: f.homeUrl || f.sourceUrl, target: '_blank', rel: 'noopener' }, f.firm)
+          ),
+          e('div', { className: 'size' },
+            f.sourceUrl
+              ? e('a', { className: 'firm-link', href: f.sourceUrl, target: '_blank', rel: 'noopener', style: { color: 'inherit', textDecoration: 'underline', textDecorationColor: 'var(--muted)' } }, f.size)
+              : f.size
+          ),
+          e('div', { className: 'name', style: single ? { marginTop: 0 } : null }, f.fund),
+          e('div', { className: 'note', style: single ? { marginTop: 0, textAlign: 'right' } : null }, f.date, ' · ', f.note)
+        )
+      )
+    )
+  );
+}
+
+function PulseCell({ label, v, d, dir }) {
+  const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '—';
+  return e('div', { className: 'pulse-cell' },
+    e('div', { className: 'label' }, label),
+    e('div', { className: 'v' }, v),
+    e('div', { className: `delta ${dir}` }, arrow, ' ', d)
+  );
+}
+
+function CompetitorSection({ competitors }) {
+  return e('section', { className: 'section', 'data-screen-label': 'Competitors' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '03'),
+      e('span', null, 'Competitor Watch'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, '4 prints')
+    ),
+    e('h2', { className: 'section-title' }, 'What our peers ', e('em', null, 'did this week')),
+    e('div', { className: 'comp-list' },
+      competitors.map((c, i) =>
+        e('div', { key: i, className: 'comp-row' },
+          e('div', { className: 'comp-mono', style: { background: c.brand } },
+            initials(c.firm),
+            c.flag === 'NASHVILLE' && e('span', { className: 'nash', title: 'Nashville-based' })
+          ),
+          e('div', null,
+            e('div', { className: 'comp-meta' },
+              e('span', { className: 'firm' }, e('a', { href: c.firmUrl, target: '_blank', rel: 'noopener' }, c.firm)),
+              e('span', { className: 'dot' }),
+              e('span', null, c.hq),
+              e('span', { className: 'dot' }),
+              e('span', { className: `tag ${c.typeColor}` }, c.type),
+              c.flag && c.flag !== 'NASHVILLE' && e('span', { className: 'dot' }),
+              c.flag && c.flag !== 'NASHVILLE' && e('span', { className: 'comp-tag-grey' }, c.flag.toLowerCase())
+            ),
+            e('h3', { className: 'comp-headline' }, e('a', { href: c.sourceUrl, target: '_blank', rel: 'noopener' }, c.headline)),
+            e('div', { className: 'comp-detail' }, c.detail),
+            e('div', { className: 'comp-source' },
+              'Source: ',
+              e('a', { href: c.sourceUrl, target: '_blank', rel: 'noopener' }, c.sourceName),
+              e('span', { className: 'arrow' }, ' ↗')
+            )
+          ),
+          e('div', { className: 'comp-date' },
+            e('span', { className: 'num' }, c.date)
+          )
+        )
+      )
+    )
+  );
+}
+
+function SectorSection({ sectors }) {
+  const [expanded, setExpanded] = React.useState(null);
+  const maxDeals = Math.max(...sectors.map(s => s.deals));
+  return e('section', { className: 'section', 'data-screen-label': 'Sectors' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '04'),
+      e('span', null, 'Sector Heatmap'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, '42 this wk · 1032 YTD · click for detail')
+    ),
+    e('h2', { className: 'section-title' }, 'Where the ', e('em', null, 'capital is flowing')),
+    e('div', { className: 'heat' },
+      sectors.map((s, i) => {
+        const hasWow = typeof s.wow === 'number';
+        const dir = !hasWow ? 'flat' : s.wow > 0 ? 'up' : s.wow < 0 ? 'dn' : 'flat';
+        const sign = hasWow && s.wow > 0 ? '+' : '';
+        const isOpen = expanded === i;
+        return e(React.Fragment, { key: i },
+          e('div', {
+              className: `heat-row ${s.hot ? 'hot' : ''} ${isOpen ? 'open' : ''}`,
+              onClick: () => setExpanded(isOpen ? null : i),
+              style: { cursor: 'pointer' },
+              title: 'Click to view deals',
+            },
+            e('div', { className: 'name' },
+              e('span', { style: { display: 'inline-block', width: 14, marginRight: 6, transform: isOpen ? 'rotate(90deg)' : 'none', transition: 'transform 0.15s', color: 'var(--muted)' } }, '▶'),
+              s.name
+            ),
+            e('div', { className: 'deals' }, s.deals.toLocaleString()),
+            e('div', { className: 'bar-wrap' },
+              e('div', { className: 'bar', style: { width: `${(s.deals / maxDeals) * 100}%` } })
+            ),
+            e('div', { className: `wow ${dir}` }, hasWow ? (sign + s.wow + '% vs 4wk') : 'small base')
+          ),
+          isOpen && e('div', {
+              className: 'heat-detail',
+              style: {
+                background: 'var(--paper-2)',
+                borderLeft: '3px solid var(--accent)',
+                margin: '4px 0 12px 0',
+                padding: '12px 16px',
+                fontSize: 13,
+              },
+            },
+            e('table', { className: 'ma-table', style: { width: '100%', marginTop: 0 } },
+              e('thead', null,
+                e('tr', null,
+                  e('th', null, 'Target'),
+                  e('th', null, 'Buyer / Sponsor'),
+                  e('th', { style: { textAlign: 'right' } }, 'EV'),
+                  e('th', null, 'Note'),
+                  e('th', null, 'Type'),
+                  e('th', null, 'Date')
+                )
+              ),
+              e('tbody', null,
+                s.detail.map((d, j) =>
+                  e('tr', { key: j },
+                    e('td', { className: 'target' }, d.tgt),
+                    e('td', { className: 'sponsor' }, d.buyer),
+                    e('td', { className: 'num', style: { fontWeight: d.ev !== 'Undisc.' ? 600 : 400, color: d.ev !== 'Undisc.' ? 'inherit' : 'var(--muted)' } }, d.ev),
+                    e('td', { className: 'sponsor', style: { fontStyle: 'italic', color: 'var(--muted)' } }, d.note || '—'),
+                    e('td', null, e('span', { className: 'typ' }, d.type)),
+                    e('td', { className: 'date' }, d.date)
+                  )
+                )
+              )
+            )
+          )
+        );
+      })
+    )
+  );
+}
+
+function NewsSection({ news, portfolio }) {
+  return e('section', { className: 'section', 'data-screen-label': 'News' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '05'),
+      e('span', null, 'News & Trends'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, `${news.length} picks${portfolio ? ` + ${portfolio.length} portco` : ''}`)
+    ),
+    e('h2', { className: 'section-title' }, 'What you ', e('em', null, 'should read')),
+    news.map((n, i) =>
+      e('div', { key: i, className: 'news-row' },
+        e('div', { className: 'tagcol' }, n.tag),
+        e('div', null,
+          e('h4', null, e('a', { href: n.url, target: '_blank', rel: 'noopener' }, n.title)),
+          e('div', { className: 'src' },
+            e('a', { href: n.url, target: '_blank', rel: 'noopener' }, n.source),
+            e('span', { className: 'read' }, n.readTime),
+            ' · ',
+            e('a', { href: n.url, target: '_blank', rel: 'noopener' }, 'Read ↗')
+          ),
+          e('div', { className: 'summary' }, n.summary)
+        )
+      )
+    ),
+    portfolio && portfolio.length > 0 && e(PortfolioWatch, { portfolio })
+  );
+}
+
+function PortfolioWatch({ portfolio }) {
+  return e('div', { style: { marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--line)' } },
+    e('div', { className: 'eyebrow', style: { marginBottom: 16 } },
+      e('span', null, 'Portfolio Watch'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, `${portfolio.length} portco-relevant items · last 7 days`)
+    ),
+    portfolio.map((p, i) => {
+      const readUrl = p.readUrl || p.url;
+      return e('div', { key: i, className: 'news-row' },
+        e('div', { className: 'tagcol' }, p.tag),
+        e('div', null,
+          e('h4', null, e('a', { href: p.url, target: '_blank', rel: 'noopener', dangerouslySetInnerHTML: { __html: p.title } })),
+          e('div', { className: 'src' },
+            e('a', { href: p.url, target: '_blank', rel: 'noopener' }, p.source),
+            ' · ',
+            e('a', { href: readUrl, target: '_blank', rel: 'noopener' }, 'Read ↗')
+          ),
+          e('div', { className: 'summary', dangerouslySetInnerHTML: { __html: p.summaryHTML } })
+        )
+      );
+    })
+  );
+}
+
+function PolicySection({ policy }) {
+  return e('section', { className: 'section', 'data-screen-label': 'Policy' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '06'),
+      e('span', null, 'Policy Watch'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, 'Federal · State')
+    ),
+    e('h2', { className: 'section-title' }, 'Policy & ', e('em', null, 'regulation')),
+    policy.map((p, i) =>
+      e('div', { key: i, className: 'policy-row' },
+        e('div', { className: 'agency' }, p.agency),
+        e('div', null,
+          e('h5', null, e('a', { href: p.url, target: '_blank', rel: 'noopener' }, p.title)),
+          e('div', { className: 'note' }, p.note)
+        ),
+        e('div', { className: `impact ${p.impact}` }, e('span', { className: 'dot' }), p.impact)
+      )
+    )
+  );
+}
+
+function EventsSection({ events }) {
+  return e('section', { className: 'section', 'data-screen-label': 'Events' },
+    e('div', { className: 'eyebrow' },
+      e('span', { className: 'num' }, '07'),
+      e('span', null, 'Conferences Ahead'),
+      e('span', { className: 'rule' }),
+      e('span', { className: 'meta' }, 'Next 30 days')
+    ),
+    e('h2', { className: 'section-title' }, 'Where to ', e('em', null, 'be seen')),
+    e('div', { className: 'events' },
+      events.map((ev, i) =>
+        e('div', { key: i, className: `event-row ${ev.attend ? 'attend' : ''} ${ev.consider ? 'consider' : ''}` },
+          e('div', { className: 'date' }, ev.date),
+          e('div', { className: 'name' },
+            e('a', { href: ev.url, target: '_blank', rel: 'noopener' }, ev.name),
+            ev.flag && e('span', { className: 'flag' }, ev.flag)
+          ),
+          e('div', { className: 'loc' }, ev.loc),
+          e('div', { className: 'att' },
+            ev.attend ? e('span', { className: 'pip' }) : null,
+            ev.consider ? e('span', { className: 'pip consider' }) : null,
+            ev.attend ? 'WCP Attending' : ev.consider ? 'Consider next yr' : '—'
+          )
+        )
+      )
+    )
+  );
+}
+
+function Footer() {
+  return e('footer', { className: 'foot' },
+    e('div', { className: 'row1' },
+      e('div', { className: 'logo' },
+        e('a', { href: 'https://www.whistlercapital.com/', target: '_blank', rel: 'noopener', 'aria-label': 'Whistler Capital Partners' },
+          e('img', { src: WCP_LOGO_SRC, alt: 'WCP', className: 'wcp-mark-foot' })
+        ),
+        'WCP ', e('span', { className: 'amp' }, 'Weekly')
+      ),
+      e('div', { className: 'nav' },
+        e('a', { href: 'mailto:research@whistlercapital.com?subject=WCP%20Weekly%20-%20Subscribe' }, 'Subscribe'),
+        e('a', { href: '#archive', onClick: (ev) => { ev.preventDefault(); } }, 'Archive'),
+        e('a', { href: 'mailto:research@whistlercapital.com?subject=WCP%20Weekly%20-%20Feedback' }, 'Feedback'),
+        e('a', { href: 'mailto:research@whistlercapital.com?subject=WCP%20Weekly%20-%20Unsubscribe' }, 'Unsubscribe')
+      )
+    )
+  );
+}
+
+function TweaksUI({ tw, setTweak }) {
+  return e(TweaksPanel, { title: 'Tweaks' },
+    e(TweakSection, { title: 'Theme' },
+      e(TweakRadio, {
+        label: 'Mode',
+        value: tw.theme,
+        options: ['light', 'dark'],
+        onChange: v => setTweak('theme', v)
+      }),
+      e(TweakColor, { label: 'Accent', value: tw.accent, onChange: v => setTweak('accent', v) })
+    ),
+    e(TweakSection, { title: 'Layout' },
+      e(TweakRadio, {
+        label: 'Density',
+        value: tw.density,
+        options: ['comfortable', 'compact'],
+        onChange: v => setTweak('density', v)
+      }),
+      e(TweakRadio, {
+        label: 'Masthead',
+        value: tw.masthead,
+        options: ['serif', 'condensed', 'stencil'],
+        onChange: v => setTweak('masthead', v)
+      })
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+</script>
+</body>
+</html>
