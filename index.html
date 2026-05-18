@@ -1346,13 +1346,13 @@ window.NEWSLETTER_DATA = {
     ytd_deals: 1169,
     briefWindow: "May 11\u201315",
     numBriefs: 5,
-    briefDescriptor: "normalization",
+    briefDescriptor: "lighter",
   },
 
   // EDITOR'S NOTE — 3 paragraphs, signoff added by app.jsx
   brief: [
-    "A normalization week. 59 deals (\u201324% WoW) and $1.6B of disclosed capital \u2014 down from $12.1B \u2014 as the market reverted to mid-market rhythm with no mega-pharma prints. CMS dropped the week\u2019s heaviest policy signal: a national enrollment moratorium on new hospice and home health providers, freezing de novo entry. Hospice valuations are ticking upward (Mertz Taggart), and Kinderhook completed its Enhabit take-private in the same window \u2014 a scarcity premium setup in real time.",
-    "From the competitive funds to WCP: two tracker prints \u2014 the lightest in four issues. Lorient Capital took a majority stake in PeterMD (D2C telehealth, 400K+ patients, Medicine 3.0 thesis). Frontline\u2019s JoyBridge Kids acquired two clinics from shuttered A Bridge To Achievement, expanding into adult autism \u2014 building while PsychPlus filed Chapter 11 and Stokes Counseling closed.",
+    "A lighter week. 59 deals (\u201324% WoW) and $1.6B of disclosed capital \u2014 down from $12.1B \u2014 as the market reverted to mid-market rhythm with no mega-pharma prints. CMS dropped the week\u2019s heaviest policy signal: a national enrollment moratorium on new hospice and home health providers, freezing de novo entry. Hospice valuations are ticking upward (Mertz Taggart), and Kinderhook completed its Enhabit take-private.",
+    "From the competitive funds to WCP: two competitor prints \u2014 the lightest in four issues. Lorient Capital took a majority stake in PeterMD (D2C telehealth, 400K+ patients, Medicine 3.0 thesis). Frontline\u2019s JoyBridge Kids acquired two clinics from shuttered A Bridge To Achievement, expanding into adult autism \u2014 building while PsychPlus filed Chapter 11 and Stokes Counseling closed.",
     "Capital formation: Water Street Healthcare Partners closed Fund VI at $1.9B (hard cap, oversubscribed) \u2014 the week\u2019s HC-dedicated anchor; $2.8B total across 3 closes + 1 CV. Facilities-Based led the sector heatmap (13 deals) on senior living and MOB activity; Outpatient doubled WoW on 8 deals. Median deal size fell to $127M from $425M \u2014 a mid-market-dominated week.",
   ],
 
@@ -1382,7 +1382,7 @@ window.NEWSLETTER_DATA = {
   {
     firm: "Frontline Healthcare Partners",
     hq: "Charleston, SC",
-    brand: "#F2F3F5",
+    brand: "#15355F",
     headline: "Add-on: JoyBridge Kids (Frontline portco) acquires two A Bridge clinics",
     type: "Add-on / LBO",
     typeColor: "yellow",
@@ -1402,7 +1402,7 @@ window.NEWSLETTER_DATA = {
     fund: "Water Street Healthcare Partners VI",
     size: "$1.9B",
     date: "May 15, 2026",
-    note: "First and final close; oversubscribed, closed at hard cap. HC-dedicated: medical products and diagnostics, pharmaceutical and life sciences, healthcare services. Predecessor Fund V was ~$1.4B. Water Street is a 73-firm tracker member (Competitive tier).",
+    note: "First and final close; oversubscribed, closed at hard cap. HC-dedicated: medical products and diagnostics, pharmaceutical and life sciences, healthcare services. Predecessor Fund V was ~$1.4B.",
     homeUrl: "https://waterstreet.com/",
     sourceUrl: "https://waterstreet.com/news/water-street-healthcare-partners-closes-1-9-billion-fund",
     sourceName: "Water Street, 5/15/26",
@@ -1433,7 +1433,7 @@ window.NEWSLETTER_DATA = {
     size: "Oversubscribed",
     date: "May 12, 2026",
     note: "Firm rebranded from Riverside Partners to RS2 Healthcare Partners \u2014 now exclusively HC-focused LMM. CV for Loftware (global enterprise labeling and artwork management; life sciences vertical is largest and fastest-growing end-market). Signals GP conviction in life-sci vertical growth.",
-    homeUrl: "https://rs2hcp.com/",
+    homeUrl: "https://rs2healthcare.com/",
     sourceUrl: "https://www.prnewswire.com/news-releases/riverside-partners-rebrands-as-rs2-healthcare-partners-closes-continuation-vehicle-for-loftware-302768290.html",
     sourceName: "PRNewswire, 5/12/26",
   },
@@ -1683,7 +1683,7 @@ window.NEWSLETTER_DATA = {
     impact: "OVERSIGHT",
     note: "Holland & Knight identifies GPOs, PBMs, hospital pricing, and PE-backed provider consolidation as top targets for 2026 congressional investigations. The PE-specific flag centers on physician practice management and behavioral health roll-ups \u2014 the exact sectors where FTC enforcement has already intensified. Not a rule, but a precursor to subpoena activity. Proactive compliance documentation and transparent pricing narratives are the hedge.",
     briefDate: "Brief 5/11",
-    url: "https://www.lexology.com/library/detail.aspx?g=e0aed37e-7450-4ad3-82a8-c2381483b6fb",
+    url: "https://www.hklaw.com/en/insights/publications/2026/05/warning-signs-potential-congressional-investigations",
     googleQuery: "Holland Knight congressional investigations healthcare GPO PBM PE 2026",
   },
 ],
@@ -2270,6 +2270,15 @@ function App() {
       // Soften paper-2 etc derived
     }
   }, [tw.theme, tw.accent]);
+
+  // Auto-derive document.title from meta.issue so the browser-tab title
+  // matches the rendered issue without a per-week edit to src/index.html
+  // or the standalone build template.
+  useEffect(() => {
+    if (D && D.meta && D.meta.issue) {
+      document.title = 'WCP Weekly · ' + D.meta.issue;
+    }
+  }, [D && D.meta && D.meta.issue]);
 
   return e('div', { className: 'client' },
     e(ClientChrome, null),
