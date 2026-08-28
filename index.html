@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>WCP Weekly · Volume 1 · Issue 18</title>
+<title>WCP Weekly · Volume 1 · Issue 19</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600;1,8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
@@ -566,6 +566,33 @@ html, body {
   position: absolute; top: 0; left: 0;
   width: 100%; height: 2px;
   background: var(--accent);
+}
+
+/* Single-fund card. With one entry the strip collapses to a single wide row, so the
+   note stops being a one-line label and becomes a paragraph — set it as prose
+   (matching .comp-detail) rather than all-caps mono, and give the date its own line. */
+.fund-card--single .firm { margin-bottom: 0; }
+.fund-card--single .size { line-height: 1; }
+.fund-card--single .name {
+  font-size: 12.5px;
+  margin-top: 0;
+  line-height: 1.35;
+}
+.fund-card--single .note {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.fund-card--single .note .fund-date {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 5px;
 }
 
 /* === M&A TABLE === */
@@ -1332,45 +1359,39 @@ html[data-viewport="mobile"] .viewport-toggle {
 <body>
 <div id="root"></div>
 <script>
-// WCP Weekly Newsletter -- Volume 1, Issue 18
-// Week of August 15-21, 2026 (deal universe: 8/17-8/21 briefs + PitchBook 8/21 export)
-// Sources: Healthcare Dealflow Daily Briefs (.msg, 8/17-8/21), PitchBook All_Columns 2026-08-21 (header row 8),
-// WCP 73-firm competitor reference. Baseline: DEPLOYED Issue 17 (live GitHub Pages, 56 deals / YTD 1,780).
-// Links: all 18 BRG tracked links resolved to publisher-direct URLs at the pre-push gate (Issue 16/17 standard).
-// Two labeled stand-ins: Foresite/Abcuro (PitchBook-only, 342531-37T, release pending) and the Bass Berry
-// Investors event (firm events index). Dedup: 4 announce->close re-counts removed vs prior issues --
-// Kartos/Ipsen (I11), LucyRx/Abarca (I9), Ultradent/Mitsui (I9), SimpliDerm/Cellution (I14).
-// Cascade applied: 52 -> 48 deals, sector counts/shares/WoW, spark, YTD 1,828, subject, brief.
-// Capital Formation: funds: [] -- zero HC-dedicated closes in the 8/17-8/21 briefs (fourth straight
-// week), so the section is dropped per SKILL.md:245 rather than carrying a non-close placeholder.
-// Re-verified against all five raw briefs: the week's only capital events were company financings
-// (Werewolf/Ambros $150M placement, Cityblock $116M, Abcuro $66M D, Serif/SEVA) and two new-firm
-// launches (SlateView, One Orchard) -- all already counted as deal rows; no fund raise or close.
+// WCP Weekly Newsletter -- Volume 1, Issue 19
+// Week of August 22-28, 2026 (deal universe: 8/24-8/28 briefs + PitchBook 8/28 export)
+// Sources: Healthcare Dealflow Daily Briefs (.msg, 8/24-8/28), PitchBook All_Columns 2026-08-28 (header row 8),
+// WCP 73-firm competitor reference. Baseline: DEPLOYED Issue 18 (live GitHub Pages, 48 deals / YTD 1,828,
+// reflecting your four gate cuts of completion-only re-announcements -- rule adopted this issue).
+// Link note: All story links resolved to publisher-direct URLs via Chrome redirect capture on 8/28 and
+// verified live (page titles matched). Zero stand-ins: every competitor card carries a real release or the
+// Healthcare Dealflow scoop page. Bass Berry Investors event upgraded to the live specific page (16thannualhcic).
 
 window.NEWSLETTER_DATA = {
   meta: {
-    issue: "Volume 1 · Issue 18",
-    week: "Week of August 15–21, 2026",
+    issue: "Volume 1 · Issue 19",
+    week: "Week of August 22–28, 2026",
     edition: "Monday Edition",
     sender: "WCP Research",
-    subject: "WCP Weekly · Vol 1 No 18: 48 deals · Weave $650M take-private, UHS closes Talkspace $835M · Five competitor firms print",
-    sendDate: "2026-08-24",
-    ytd_deals: 1828,
-    briefWindow: "Aug 17–21",
-    briefDescriptor: "take-private-led",
+    subject: "WCP Weekly · Vol 1 No 19: 45 deals · McKesson's $2.25B Precision Medicine buy, two Healthcare Dealflow scoops · JATT III $69M ends the capital drought",
+    sendDate: "2026-08-31",
+    ytd_deals: 1873,
+    briefWindow: "Aug 24–28",
+    briefDescriptor: "strategics-led",
   },
 
   brief: [
-    "Volume eased to 48 deals (-14%) but ticket sizes stepped up. Francisco Partners agreed to take patient-engagement platform Weave private at a ~$650M equity value, UHS closed its $835M Talkspace acquisition, and BioMarin signed Alesta Therapeutics for $275M upfront plus up to $215M in milestones. With real estate quiet after last week's $2.0B wave (about $0.1B disclosed this week), the three disclosed operating-company deals pushed the median to $0.7B and the average to $0.6B, both up. Two reverse-merger biotechs (Fulcrum/Slate, Werewolf/Ambros with a $150M oversubscribed placement) rounded out a strategics-led tape.",
-    "Five firms from the competitor set printed. Shore Capital's Guidant Power added hospital electrical-safety specialist Dyna Scan, Varsity Healthcare Partners took a strategic minority in CheckedUp alongside Providence Equity, and Vistria printed for a second straight week as Risepoint acquired Keypath Education's North American operations. On the sell side, QHP Capital and Truehelm's InformedDNA divested its genetic-testing utilization management unit to Zyter, and Foresite Capital participated in Abcuro's $66M Series D, its third consecutive week in print. Separately, Rubicon Founders and Oak HC/FT-backed Indigo told PE Hub it is hunting med-mal tuck-ins. No healthcare-dedicated fund closed for a fourth straight week, and what capital formation there was came as new-firm launches rather than closes: SlateView Capital debuted in senior housing with the Meadowbrook acquisition, and One Orchard launched as a healthcare real-assets firm seeded with the 25-asset InfraMed portfolio. The week's notable capital event was Ensemble Health Partners signing a new sponsor, which released a $671M distribution to Bon Secours Mercy, lifting its payouts from the RCM stake past $1.1B this year.",
-    "One hot flag, and it needs the base caveat: Professional Services ran +500% week over week, but off a base of one deal; read the trend, not the percentage. Six prints there (healthcare education, IT consulting, life-sciences events, point-of-care media) do suggest services demand is broadening. Facilities-Based cooled 40% as the REIT bid paused, Life Sciences normalized to eight after two hot weeks, Medical Technology went blank for the first time since late May, and Behavioral returned after a blank week (UHS/Talkspace, Radial/Mindful Health). On policy, Oregon's toughened HCMO rules took effect, FDA floated a competency-based framework for AI devices, a federal appellate court handed hospice a safe-harbor win, and DOJ antitrust revived targeted Second Requests for biopharma."
+    "Volume settled at 45 deals (-6%) in a week McKesson ran twice: a $2.25B definitive agreement for clinical-research and commercialization platform Precision Medicine Group, and, per a Healthcare Dealflow scoop from Massachusetts HPC filings, a pending acquisition of eye-care MSO Spectrum Vision Partners (50+ practices, 140+ doctors) by its PRISM Vision subsidiary from Blue Sea Capital. A second scoop surfaced Sword Health's planned cash purchase of Headspace parent OrangeDot, expected to close September 14 and unreported elsewhere. With Precision Medicine the only firm disclosed operating-company price, average and median print at $2.3B on a single data point; read the deal, not the distribution. BioXcel's Chapter 11 asset sale to Teva marked the week's distress print, and disclosed real estate held steady near $0.3B led by American Healthcare REIT's $197M NorCal senior-housing buy.",
+    "Five firms from the competitor set printed, every one on a verified release or filing. Shore Capital made it two straight weeks as Freestone added benefits brokerage 360 Benefits (its Sweetmore bakery add-on stayed outside the healthcare count), BPOC invested in sister companies Master Medical Equipment and ReNew Biomedical, and Linden bought specialty pharmacy platform ArtesRx from fellow tracked sponsor Flexpoint Ford, the first tracked-on-tracked trade in the set. Great Point Partners printed for the first time as VetnCare added Geary Veterinary Hospital, and Blue Sea Capital shows up on the sell side of the Spectrum Vision scoop. After five weeks without a healthcare-dedicated close, JATT III's $69M SPAC IPO closed with the greenshoe fully exercised, modest capital, but capital.",
+    "No hot flags this week: Health Plans and Outpatient both ran +50% but on three deals each, below the five-deal threshold, so the discipline holds. Physician Services led at ten prints, including Family Care Network buying Optum's Bellingham clinic, a rare payer-to-independent divestiture worth filing. Policy ran both directions at once: Bass Berry counted eight states tightening transaction review since January while North Carolina deregulated dental management review, California floated penalties up to 125% of overspend above its cost targets, the FTC finalized its Ascension/Amsurg consent order with seven ASC divestitures, and CMS let the DMEPOS enrollment moratorium lapse while providers brace for the home health and hospice version to extend."
   ],
 
   pulse: {
-    deals_wk:    { v: 48,      d: "HC deals announced this week",                    dir: "down" },
-    avg_ev:      { v: "$0.6B", d: "3 of 48 disclosed (operating-co M&A)",            dir: "up" },
-    median_mult: { v: "$0.7B", d: "median of disclosed M&A deals",                   dir: "up" },
-    fund_closes: { v: "$0.0B", d: "0 HC fund closes, fourth straight week",          dir: "flat" },
+    deals_wk:    { v: 45,      d: "HC deals announced this week",                       dir: "down" },
+    avg_ev:      { v: "$2.3B", d: "1 of 45 disclosed (McKesson/Precision Medicine)",    dir: "up" },
+    median_mult: { v: "$2.3B", d: "median = the single disclosed deal",                 dir: "up" },
+    fund_closes: { v: "$0.1B", d: "JATT III healthcare SPAC closed $69M IPO",           dir: "up" },
   },
 
   competitors: [
@@ -1378,183 +1399,191 @@ window.NEWSLETTER_DATA = {
       firm: "Shore Capital Partners",
       hq: "Chicago, IL",
       brand: "#243E73",
-      headline: "Add-on: Guidant Power acquires Dyna Scan Technical Services",
+      headline: "Add-on: Freestone adds benefits brokerage 360 Benefits",
       type: "Add-on / LBO",
       typeColor: "yellow",
-      date: "August 18, 2026",
-      detail: "Shore-backed Guidant Power acquired Dyna Scan Technical Services, a Cincinnati infrared-inspection firm specializing in electrical-risk detection for hospitals and health systems, deepening Guidant's healthcare facilities-safety platform. (BRG Daily Brief 8/18; PitchBook LBO 8/18 via sponsor Shore Capital.) Shore's first print since its Texas MedClinic exit to HCA in early August.",
+      date: "August 25, 2026",
+      detail: "Shore-backed Freestone Insurance Group partnered with Chicago's 360 Benefits, adding employer-sponsored health and welfare brokerage, advisory and administration across self-funded, level-funded and fully insured frameworks. (BusinessWire 8/25; PitchBook LBO 8/25 via sponsor Shore.) Second consecutive week in print after Guidant/Dyna Scan; Shore's Sweetmore Bakeries also added Fantasy Cookie this week, a food print excluded from the healthcare count.",
       tier: "Most Competitive",
       flag: null,
-      sourceUrl: "https://www.prweb.com/releases/guidant-power-expands-healthcare-electrical-safety-capabilities-with-acquisition-of-dyna-scan-technical-services-302852646.html",
-      sourceName: "BRG Daily Brief 8/18/26",
-      pitchbookId: "342858-16T",
+      sourceUrl: "https://www.businesswire.com/news/home/20260825309991/en/Freestone-Insurance-Group-Announces-Partnership-with-360-Benefits",
+      sourceName: "BusinessWire 8/25/26",
+      pitchbookId: "343862-65T",
       firmUrl: "https://www.shorecp.com",
     },
     {
-      firm: "Varsity Healthcare Partners",
-      hq: "Los Angeles, CA",
-      brand: "#0A1532",
-      headline: "Minority: Joins Providence Equity's CheckedUp acquisition",
-      type: "Minority Investment",
+      firm: "BPOC",
+      hq: "Chicago, IL",
+      brand: "#7F55D3",
+      headline: "Platform: Backs Master Medical Equipment and ReNew Biomedical",
+      type: "Growth / Platform",
       typeColor: "green",
-      date: "August 19, 2026",
-      detail: "Varsity Healthcare Partners will take a strategic minority stake in CheckedUp, the specialty point-of-care education and engagement platform connecting patients, providers and life-sciences companies, as Providence Equity acquires the business from Rockbridge Growth Equity. Management continues to lead. A media-adjacent print for a healthcare-services specialist.",
+      date: "August 24, 2026",
+      detail: "BPOC made strategic investments in sister companies Master Medical Equipment and ReNew Biomedical, which together provide new and refurbished capital equipment, rentals, repair and preventative maintenance to EMS and post-acute markets. (BusinessWire 8/24; PitchBook growth investment 8/24, debt-supported.) First print of the cycle for one of the longest-tenured healthcare-only firms in the set.",
       tier: "Most Competitive",
       flag: null,
-      sourceUrl: "https://www.prnewswire.com/news-releases/rockbridge-growth-equity-announces-sale-of-checkedup-to-providence-equity-partners-302854323.html",
-      sourceName: "BRG Daily Brief 8/19/26",
-      pitchbookId: null,
-      firmUrl: "https://www.varsityhealthcarepartners.com",
+      sourceUrl: "https://www.businesswire.com/news/home/20260824851081/en/BPOC-Partners-with-Master-Medical-Equipment-and-ReNew-Biomedical",
+      sourceName: "BusinessWire 8/24/26",
+      pitchbookId: "343641-52T",
+      firmUrl: "https://www.bpoc.com",
     },
     {
-      firm: "Vistria Group",
+      firm: "Linden (Chicago)",
       hq: "Chicago, IL",
-      brand: "#EDEBE8",
-      headline: "Add-on: Risepoint acquires Keypath Education's NA operations",
+      brand: "#213041",
+      headline: "Platform: Acquires ArtesRx from Flexpoint Ford",
+      type: "Buyout / LBO",
+      typeColor: "yellow",
+      date: "August 24, 2026",
+      detail: "Linden acquired specialty pharmacy platform ArtesRx from Flexpoint Ford, which built the business from three pharmacies in one state to 16 across 15 states with an internal M&A engine. (PR Newswire 8/24; PitchBook LBO 8/24.) The first tracked-on-tracked transaction in the competitor set, and Linden's second print in three weeks after Relevate Health.",
+      tier: "Competitive",
+      flag: null,
+      sourceUrl: "https://www.prnewswire.com/news-releases/flexpoint-announces-sale-of-artesrx-to-linden-capital-partners-302857838.html",
+      sourceName: "PR Newswire 8/24/26",
+      pitchbookId: "343556-92T",
+      firmUrl: "https://www.linden.com",
+    },
+    {
+      firm: "Great Point Partners",
+      hq: "Greenwich, CT",
+      brand: "#A51C30",
+      headline: "Add-on: VetnCare acquires Geary Veterinary Hospital",
       type: "Add-on / LBO",
       typeColor: "yellow",
-      date: "August 20, 2026",
-      detail: "Vistria-backed Risepoint acquired the North American operations of Keypath Education, adding 20+ university partnerships and one of the industry's largest clinical placement networks across speech-language pathology, counseling, clinical social work and pharmacy programs. (BRG 8/20; PitchBook LBO 8/18 via sponsors including Vistria.) Second consecutive week in print after Daybright's two add-ons.",
+      date: "August 25, 2026",
+      detail: "Great Point-backed VetnCare, a Northern California veterinary hospital community, acquired Walnut Creek's Geary Veterinary Hospital, an East Bay practice operating since 1979 across wellness, diagnostics, surgery and dental care. (BusinessWire 8/25; PitchBook LBO 8/25 via sponsor Great Point.) First print for Great Point since tracking began.",
       tier: "Competitive",
       flag: null,
-      sourceUrl: "https://www.prnewswire.com/news-releases/risepoint-acquires-keypath-educations-north-american-operations-to-expand-online-healthcare-education-and-clinical-placement-services-302854011.html",
-      sourceName: "BRG Daily Brief 8/20/26",
-      pitchbookId: "342981-73T",
-      firmUrl: "https://vistria.com",
+      sourceUrl: "https://www.businesswire.com/news/home/20260825722574/en/VetnCare-Announces-Acquisition-of-Geary-Veterinary-Hospital",
+      sourceName: "BusinessWire 8/25/26",
+      pitchbookId: "343763-83T",
+      firmUrl: "https://www.gppfunds.com",
     },
     {
-      firm: "QHP Capital",
-      hq: "Raleigh, NC",
-      brand: "#003069",
-      headline: "Sell-side: InformedDNA divests GTUM unit to Zyter",
-      type: "Carve-out / Exit",
+      firm: "Blue Sea Capital",
+      hq: "West Palm Beach, FL",
+      brand: "#1F6FA8",
+      headline: "Sell-side: Spectrum Vision Partners to McKesson's PRISM (scoop)",
+      type: "Exit (pending)",
       typeColor: "green",
-      date: "August 19, 2026",
-      detail: "InformedDNA, a portfolio company of Truehelm and QHP Capital, divested its Genetic Testing Utilization Management business unit to Zyter (an Infinite subsidiary), the second carve-out this year after May's Payment Integrity sale, sharpening focus on its DNAimpact precision-health platform. Arcadia Capital advised. Disciplined portfolio reshaping from two tracked sponsors.",
+      date: "August 26, 2026",
+      detail: "Per a Healthcare Dealflow scoop from Massachusetts HPC filings, PRISM Vision, a McKesson subsidiary, is set to acquire Spectrum Vision Partners, the New York eye-care MSO Blue Sea has backed since 2017, spanning 50+ ophthalmology practices, 5+ ASCs and 140+ doctors across five states. Neither party has issued a release and the deal is unreported elsewhere. A marquee pending exit for a tracked mid-market healthcare specialist.",
       tier: "Competitive",
       flag: null,
-      sourceUrl: "https://www.businesswire.com/news/home/20260818187524/en/Arcadia-Capital-Advises-InformedDNA-on-Divestiture-of-Genetic-Testing-Utilization-Management-Business-Unit-to-Zyter",
-      sourceName: "BRG Daily Brief 8/19/26",
+      sourceUrl: "https://healthcaredealflow.com/healthcare-dealflow-identifies-mckessons-pending-acquisition-of-spectrum-vision-partners/",
+      sourceName: "Healthcare Dealflow 8/26/26",
       pitchbookId: null,
-      firmUrl: "https://www.qhpcapital.com",
-    },
-    {
-      firm: "Foresite Capital",
-      hq: "Larkspur, CA",
-      brand: "#121212",
-      headline: "VC: Joins Abcuro's $66M Series D",
-      type: "Series D / VC",
-      typeColor: "green",
-      date: "August 14, 2026",
-      detail: "Foresite participated in Abcuro's $66M Series D led by New Leaf Venture, alongside Bain Capital Life Sciences, Sanofi Ventures and Mass General Brigham Ventures (PitchBook). Abcuro develops immunomodulatory antibodies. Dated 8/14, the Friday of last issue's window; it surfaced in this week's PitchBook pull and was not previously covered. Third consecutive week in print for Foresite (Obsidian PIPE, Khartis, now Abcuro).",
-      tier: "Competitive",
-      flag: null,
-      sourceUrl: "https://www.foresitecapital.com",
-      sourceName: "Foresite Capital (release link pending; deal per PitchBook)",
-      pitchbookId: "342531-37T",
-      firmUrl: "https://www.foresitecapital.com",
+      firmUrl: "https://www.blueseacapital.com",
     },
   ],
 
-  funds: [],
+  funds: [
+    {
+      firm: "JATT III Acquisition Corp",
+      fund: "Healthcare SPAC IPO (biotech and life sciences focus)",
+      size: "$69M",
+      date: "August 27, 2026",
+      note: "JATT III closed its IPO of 6.9M ordinary shares at $10.00, including full exercise of the underwriters' over-allotment, and will hunt healthcare and life-sciences combinations. The filing was flagged in Issue 17; the close ends five straight weeks without a healthcare-dedicated capital-formation close. SPAC capital, but closed capital.",
+      homeUrl: "https://www.jattacquisitioncorp.com",
+      sourceUrl: "https://www.globenewswire.com/news-release/2026/08/27/3352358/0/en/jatt-iii-acquisition-corp-announces-closing-of-69-000-000-initial-public-offering.html",
+      sourceName: "GlobeNewswire 8/27/26",
+    },
+  ],
 
   sectors: [
     {
-      name: "Physician Services", deals: 9, share: 18.8, wow: -10, hot: false,
+      name: "Physician Services", deals: 10, share: 22.2, wow: 11, hot: false,
       detail: [
-        { tgt: "North Florida Cataract Specialists and Vision Care", buyer: "Surgery Partners", ev: "n/d", note: "Two ophthalmologists + two optometrists, North Central FL; Bloom-advised", date: "8/17", type: "Add-on" },
-        { tgt: "Fargo Center for Dermatology", buyer: "Tareen Dermatology", ev: "n/d", note: "ND expansion; combined 14 locations across three states", date: "8/18", type: "Add-on" },
-        { tgt: "OB-GYN Associates of WNY", buyer: "Trinity Medical (Catholic Health-affiliated)", ev: "n/d", note: "Eight physicians, three midwives; one of WNY's largest women's health groups", date: "8/19", type: "Strategic Acquisition" },
-        { tgt: "Cottonwood Oral & Maxillofacial Surgery", buyer: "U.S. Oral Surgery Management", ev: "n/d", note: "Third New Mexico partnership (Albuquerque)", date: "8/19", type: "Add-on" },
-        { tgt: "The Smile Artists (Culver City)", buyer: "Silver Creek Dental Partners", ev: "n/d", note: "Single-site CA dental add-on", date: "8/19", type: "Add-on" },
-        { tgt: "Orlando Orthopaedic Center + surgery center", buyer: "Orthopaedic Solutions Management", ev: "n/d", note: "23rd partnership; 24 specialists, 8 locations plus ASC", date: "8/20", type: "Add-on" },
-        { tgt: "Knuckles Dermatology (KY)", buyer: "Integrated Dermatology", ev: "n/d", note: "Kentucky market entry, effective 8/18", date: "8/20", type: "Add-on" },
-        { tgt: "Bird Dental Studio (Idaho Falls)", buyer: "Straine", ev: "n/d", note: "DSO's 17th state; Mountain West push", date: "8/20", type: "Add-on" },
-        { tgt: "Berks Community Health Center", buyer: "Union Community Care", ev: "n/d", note: "FQHC merger, pending regulatory review", date: "8/21", type: "Merger" },
+        { tgt: "Meister Dental Group", buyer: "Seva Dental Team", ev: "n/d", note: "Harrison/Fairfield OH-area dental add-on", date: "8/24", type: "Add-on" },
+        { tgt: "Pointe Medical + Trulife Pharmacy entities", buyer: "First Choice Healthcare Solutions", ev: "up to $21.3M", note: "Four entities in one SPA; max consideration $21.306M (excluded from EV stats as a cap, not a price)", date: "8/24", type: "Strategic Acquisition" },
+        { tgt: "Everlight Radiology", buyer: "Radiology Partners", ev: "n/d", note: "UK/IE/AU/NZ/SA teleradiology combines with vRad; see Portfolio Watch", date: "8/25", type: "Strategic Acquisition" },
+        { tgt: "Geary Veterinary Hospital", buyer: "VetnCare (Great Point Partners)", ev: "n/d", note: "East Bay vet practice since 1979; competitor print", date: "8/25", type: "Add-on / LBO" },
+        { tgt: "Spectrum Vision Partners", buyer: "PRISM Vision (McKesson)", ev: "n/d", note: "Healthcare Dealflow scoop via MA HPC filing; Blue Sea exit; 50+ practices, 140+ doctors; unreported elsewhere", date: "8/26", type: "Strategic Acquisition (pending)" },
+        { tgt: "Endodontics of Duluth (GA)", buyer: "Specialized Dental Partners", ev: "n/d", note: "20-year Duluth endodontics practice", date: "8/27", type: "Add-on" },
+        { tgt: "Fasciano endodontics practice (Englewood Cliffs)", buyer: "Modern Micro Endodontics", ev: "n/d", note: "Ownership transition; ninth NJ location", date: "8/27", type: "Succession Acquisition" },
+        { tgt: "General dental practice (Central RI)", buyer: "Qualitas Dental Partners", ev: "n/d", note: "Unnamed longstanding practice; Southern New England expansion", date: "8/27", type: "Add-on" },
+        { tgt: "Optum Bellingham clinic", buyer: "Family Care Network", ev: "n/d", note: "Independent buys back from Optum; ~30 staff, ~8,000 patients", date: "8/28", type: "Divestiture" },
+        { tgt: "Summit Dermatology", buyer: "Golden State Dermatology", ev: "n/d", note: "Colorado Springs; GSD's Colorado entry, Mohs capability", date: "8/28", type: "Add-on" },
       ],
     },
     {
-      name: "Facilities-Based", deals: 9, share: 18.8, wow: -40, hot: false,
+      name: "Facilities-Based", deals: 9, share: 20.0, wow: 0, hot: false,
       detail: [
-        { tgt: "Meadowbrook at Agoura Hills", buyer: "SlateView Capital (platform launch)", ev: "n/d", note: "RE: 156-unit AL/MC; first investment of new senior-housing firm", date: "8/17", type: "RE" },
-        { tgt: "Wyndham Lakes (Jacksonville)", buyer: "Stagecoach Capital", ev: "$30.94M", note: "RE: 246-unit IL/AL/MC, ~$126K/unit per recorded deed", date: "8/19", type: "RE" },
-        { tgt: "Michigan ENT six-building MOB portfolio", buyer: "Crown MedRealty + institutional JV", ev: "n/d", note: "RE: 35,585 sf, 100% NNN-leased to Michigan ENT & Allergy", date: "8/19", type: "RE" },
-        { tgt: "InfraMed Properties (25-asset seed)", buyer: "One Orchard (platform launch, w/ REDICO)", ev: "n/d", note: "RE: new healthcare-infrastructure platform seeded with outpatient portfolio", date: "8/20", type: "RE" },
-        { tgt: "Southbank Medical Pavilion (Jacksonville)", buyer: "Baptist Health", ev: "$65M", note: "RE: 493K sf tower adjacent to flagship campus; Transwestern-arranged", date: "8/20", type: "RE" },
-        { tgt: "Eagan Medical Center (MN)", buyer: "Hammes Partners affiliate", ev: "$12.75M", note: "RE: multi-tenant MOB; Tareen Development exit", date: "8/20", type: "RE" },
-        { tgt: "55 E. California Blvd (Pasadena MOB)", buyer: "Meridian", ev: "n/d", note: "RE: 32K sf adjacent to Huntington Hospital; long-term Huntington lease signed", date: "8/20", type: "RE" },
-        { tgt: "820 Clermont St (Denver MOB)", buyer: "Private buyer (Marcus & Millichap)", ev: "$2.16M", note: "RE: 14,560 sf medical office", date: "8/20", type: "RE" },
-        { tgt: "Fauquier Health", buyer: "HealthSpan Partners (Bon Secours Mercy network)", ev: "n/d", note: "Lifepoint transitions 97-bed Warrenton VA hospital; agreement signed", date: "8/21", type: "Strategic Acquisition" },
+        { tgt: "Lakeview Clinic 4-building portfolio", buyer: "Davis", ev: "$31.3M", note: "RE: 114K sf sale-leaseback across four MN towns", date: "8/24", type: "RE" },
+        { tgt: "Monarch 8-community seniors portfolio", buyer: "Undisclosed buyers (series of transactions)", ev: "n/d", note: "RE: 1,100+ units IL/AL/MC; Monarch full-cycle exit", date: "8/24", type: "RE" },
+        { tgt: "Parkside Village MOB (Osage Beach, MO)", buyer: "Private buyer (Marcus & Millichap)", ev: "$3.63M", note: "RE: fully occupied 10-suite building", date: "8/24", type: "RE" },
+        { tgt: "Mid-Atlantic 4-property MOB portfolio", buyer: "Thomas Park Investments", ev: "$70M", note: "RE: 165K sf across DC, NoVA and Eastern Shore; system-anchored", date: "8/25", type: "RE" },
+        { tgt: "Sonrisa + Watermark Almaden (NorCal)", buyer: "American Healthcare REIT", ev: "$197M", note: "RE: 545-unit two-property senior portfolio from Affinius/Alliance JV", date: "8/26", type: "RE" },
+        { tgt: "Nansemond River Medical Center (Suffolk, VA)", buyer: "Woodside Health (w/ Heitman)", ev: "n/d", note: "RE: 33K sf adjacent to Sentara Obici", date: "8/26", type: "RE" },
+        { tgt: "Encore Medical Center (Bryant, AR)", buyer: "The Landes Group", ev: "n/d", note: "RE: 108K sf hospital; long-term UAMS lease signed", date: "8/26", type: "RE" },
+        { tgt: "Winnwood Retirement Community (Marietta, GA)", buyer: "S&P 500 seniors-housing company (undisclosed)", ev: "n/d", note: "RE: 202-unit IL/AL; Berkadia for Vineyard family office", date: "8/27", type: "RE" },
+        { tgt: "5107 Medical Drive MOB (San Antonio)", buyer: "University Health", ev: "$5.2M", note: "RE: third former Christus Santa Rosa building; closes Dec 1", date: "8/28", type: "RE" },
       ],
     },
     {
-      name: "Life Sciences", deals: 8, share: 16.7, wow: -43, hot: false,
+      name: "Life Sciences", deals: 6, share: 13.3, wow: -25, hot: false,
       detail: [
-        { tgt: "Slate Medicines", buyer: "Fulcrum Therapeutics (all-stock merger)", ev: "n/d", note: "Combined co takes Slate name, Nasdaq: SLTE; migraine pipeline", date: "8/17", type: "Merger" },
-        { tgt: "Carepoint Pharmacy", buyer: "New Heritage Capital", ev: "n/d", note: "50-state access-hub and dispensing pharmacy; founder partnership", date: "8/18", type: "Platform Investment" },
-        { tgt: "Alfa Wassermann", buyer: "CARR Biosystems", ev: "n/d", note: "Continuous-flow ultracentrifugation for vaccines and gene therapy; from Turytes", date: "8/18", type: "Add-on" },
-        { tgt: "Alesta Therapeutics", buyer: "BioMarin", ev: "$275M", note: "$275M upfront + up to $215M milestones; non-ALE1 assets spin out pre-close", date: "8/18", type: "Strategic Acquisition" },
-        { tgt: "Lindus Health CRO assets", buyer: "Curavit Clinical Research", ev: "n/d", note: "Expands DCT footprint into Europe", date: "8/19", type: "Asset Acquisition" },
-        { tgt: "Compliance Architects", buyer: "FDAQRC", ev: "n/d", note: "Regulatory-compliance consulting; quality systems depth", date: "8/21", type: "Add-on" },
-        { tgt: "Ambros Therapeutics", buyer: "Werewolf Therapeutics (all-stock merger)", ev: "n/d", note: "CRPS-1 program; concurrent $150M oversubscribed placement (financing excluded)", date: "8/21", type: "Merger" },
-        { tgt: "Abcuro", buyer: "New Leaf-led syndicate incl. Foresite", ev: "n/d", note: "$66M Series D (excluded from M&A EV stats); competitor print; dated 8/14", date: "8/14", type: "Series D / VC" },
+        { tgt: "ArtesRx", buyer: "Linden (from Flexpoint Ford)", ev: "n/d", note: "Specialty pharmacy, 16 pharmacies/15 states; tracked-on-tracked; competitor print", date: "8/24", type: "Buyout / LBO" },
+        { tgt: "Precision Medicine Group", buyer: "McKesson", ev: "$2.25B", note: "Clinical research + biopharma commercialization; oncology/multispecialty strategy", date: "8/25", type: "Strategic Acquisition" },
+        { tgt: "NeuroNOS stake", buyer: "UNIVO Pharmaceutical (TASE)", ev: "n/d", note: "Beyond Air divests control for equity + milestones", date: "8/25", type: "Divestiture" },
+        { tgt: "Folium Science technology + pipeline", buyer: "BiomEdit", ev: "n/d", note: "Animal-health CRISPR Guided Biotics; includes Brazil-approved BiomElix One", date: "8/26", type: "Asset Acquisition" },
+        { tgt: "New Zealand Clinical Research Group", buyer: "Advent (majority)", ev: "n/d", note: "ANZ clinical trials organisation; clinicians + Waterman retain minority", date: "8/28", type: "Majority Recap" },
+        { tgt: "BioXcel Therapeutics assets", buyer: "Teva (stalking-horse asset sale)", ev: "n/d", note: "Concurrent Chapter 11 filed to run court-supervised sale; distress print", date: "8/28", type: "Distressed Asset Sale" },
       ],
     },
     {
-      name: "Tech-Enabled", deals: 7, share: 14.6, wow: 17, hot: false,
+      name: "Tech-Enabled", deals: 6, share: 13.3, wow: -14, hot: false,
       detail: [
-        { tgt: "Weave Communications (NYSE: WEAV)", buyer: "Francisco Partners", ev: "$650M", note: "Take-private at ~$650M aggregate equity value; patient engagement + payments", date: "8/18", type: "Take-Private / LBO" },
-        { tgt: "Humata Health", buyer: "R1", ev: "n/d", note: "AI touchless prior authorization into Phare OS; see Portfolio Watch", date: "8/18", type: "Strategic Acquisition" },
-        { tgt: "Hicuity Health", buyer: "DocGo", ev: "n/d", note: "Assumes ~$52M Perceptive-held debt; ~$65M TTM revenue tele-ICU/virtual nursing; see Portfolio Watch", date: "8/18", type: "Strategic Acquisition" },
-        { tgt: "ShiftOS assets (Holly AI)", buyer: "Trusted Health", ev: "n/d", note: "AI scheduling agent folded into Trusted Works", date: "8/18", type: "Asset Acquisition" },
-        { tgt: "RepScrubs", buyer: "Undisclosed acquirer (Rockmont exit)", ev: "n/d", note: "Perioperative vendor-attire and credentialing platform; Rockmont full exit", date: "8/19", type: "Buyout / Exit" },
-        { tgt: "Serif Health", buyer: "SEVA Growth (minority)", ev: "n/d", note: "Growth investment (excluded from M&A EV stats); price-transparency data", date: "8/20", type: "Growth Investment" },
-        { tgt: "Homeward Health", buyer: "Cityblock Health", ev: "n/d", note: "Rural expansion; concurrent $116M Series E led by General Catalyst (financing excluded)", date: "8/21", type: "Strategic Acquisition" },
+        { tgt: "Healthify (India)", buyer: "Berry Street (merger)", ev: "n/d", note: "AI metabolic health platform; 2,000+ clinicians, insurance-covered GLP-1 care", date: "8/25", type: "Merger" },
+        { tgt: "Livara Health", buyer: "Switchboard Health", ev: "n/d", note: "Virtual MSK care into referral-navigation platform; concurrent $5M round (financing excluded)", date: "8/26", type: "Strategic Acquisition" },
+        { tgt: "DeLorean AI", buyer: "WellStack", ev: "n/d", note: "Predictive analytics and risk stratification add-on", date: "8/26", type: "Add-on" },
+        { tgt: "Ella + elbi platforms (TapRoot)", buyer: "ALIS", ev: "n/d", note: "AI dementia and behavioral care support; ALIS's first acquisition", date: "8/26", type: "Asset Acquisition" },
+        { tgt: "ABW Medical", buyer: "Savista", ev: "n/d", note: "Ambulatory/non-acute RCM; athenahealth-preferred; see Portfolio Watch", date: "8/27", type: "Strategic Acquisition" },
+        { tgt: "Higgs Boson Health", buyer: "Globus Medical", ev: "n/d", note: "Duke-incubated digital patient-journey and surgical intelligence", date: "8/27", type: "Strategic Acquisition" },
       ],
     },
     {
-      name: "Professional Services", deals: 6, share: 12.5, wow: 500, hot: true,
+      name: "Professional Services", deals: 5, share: 11.1, wow: -17, hot: false,
       detail: [
-        { tgt: "Pacific College", buyer: "Westcliff University", ev: "n/d", note: "CA nursing school; 95.8% NCLEX-RN pass rate", date: "8/17", type: "Strategic Acquisition" },
-        { tgt: "Dyna Scan Technical Services", buyer: "Guidant Power (Shore Capital)", ev: "n/d", note: "Hospital infrared/electrical-safety inspection; competitor print", date: "8/18", type: "Add-on / LBO" },
-        { tgt: "CheckedUp", buyer: "Providence Equity + Varsity (minority)", ev: "n/d", note: "Point-of-care education platform; Rockbridge exit; competitor print", date: "8/19", type: "Buyout" },
-        { tgt: "Impulse Strategic Solutions (team)", buyer: "Grant Thornton Advisors", ev: "n/d", note: "Healthcare IT consulting team joins AI, Data and Technology practice", date: "8/20", type: "Team Acquisition" },
-        { tgt: "Keypath Education (NA operations)", buyer: "Risepoint (Vistria)", ev: "n/d", note: "20+ university partnerships, clinical placement network; competitor print", date: "8/20", type: "Add-on / LBO" },
-        { tgt: "River West Meeting Associates", buyer: "Etherio", ev: "n/d", note: "Life-sciences meetings and events; Chicago", date: "8/21", type: "Add-on" },
+        { tgt: "Nevvon", buyer: "BVP Forge (strategic investment)", ev: "n/d", note: "Home-care workforce compliance/training; growth investment (excluded from EV stats)", date: "8/24", type: "Growth Investment" },
+        { tgt: "eMedCert assets", buyer: "360training", ev: "n/d", note: "ACLS/PALS/BLS online certification brand", date: "8/25", type: "Asset Acquisition" },
+        { tgt: "Pixel Health", buyer: "Thurston Group", ev: "n/d", note: "Healthcare IT consulting and MSP for hospitals and large groups; platform partnership", date: "8/27", type: "Platform Investment" },
+        { tgt: "OptiCall", buyer: "Promptly", ev: "n/d", note: "Conversational AI + contact center for specialty practices", date: "8/28", type: "Add-on" },
+        { tgt: "Analytica Consulting", buyer: "Imagenet", ev: "n/d", note: "Payer-focused data engineering, analytics and AI consulting", date: "8/28", type: "Add-on" },
       ],
     },
     {
-      name: "Suppliers & Logistics", deals: 3, share: 6.3, wow: null, hot: false,
+      name: "Outpatient", deals: 3, share: 6.7, wow: 50, hot: false,
       detail: [
-        { tgt: "Life Couriers", buyer: "JLL Partners", ev: "n/d", note: "Completed; Munich-based time-critical healthcare logistics incl. radiopharma", date: "8/17", type: "Buyout / LBO" },
-        { tgt: "Zoolzy LLC", buyer: "Earth Science Tech (OTC: ETST)", ev: "n/d", note: "API wholesale distributor, Doral FL; vet-market entry; micro-cap", date: "8/19", type: "Strategic Acquisition" },
-        { tgt: "Joerns Netherlands operations", buyer: "Avance Care Group", ev: "n/d", note: "Divestiture completes Joerns' portfolio realignment to North America", date: "8/21", type: "Carve-out" },
+        { tgt: "Integrated Surgical Center of Arizona", buyer: "Regent Surgical", ev: "n/d", note: "Multispecialty Avondale ASC; cardiac ASC strategy with IMS Care, AZ Heart, Valley GI", date: "8/25", type: "Add-on" },
+        { tgt: "Med-Lake Laboratory", buyer: "Gravity 360", ev: "n/d", note: "CLIA/CAP high-complexity lab, GA/AL footprint", date: "8/26", type: "Add-on" },
+        { tgt: "Boston Sports Medicine", buyer: "Cypress Health Partners / Bay State PT", ev: "n/d", note: "Ten Greater Boston PT clinics join network, effective 8/27", date: "8/28", type: "Add-on" },
       ],
     },
     {
-      name: "Behavioral Health", deals: 2, share: 4.2, wow: null, hot: false,
+      name: "Health Plans & Payor", deals: 3, share: 6.7, wow: 50, hot: false,
       detail: [
-        { tgt: "Talkspace", buyer: "Universal Health Services", ev: "$835M", note: "Closed; $5.25/sh debt-financed; virtual behavioral into acute/behavioral system", date: "8/17", type: "Strategic Acquisition" },
-        { tgt: "Mindful Health Solutions", buyer: "Radial (General Catalyst-backed)", ev: "n/d", note: "Interventional psychiatry scale-up; Aisling Capital exit", date: "8/20", type: "Strategic Acquisition" },
+        { tgt: "360 Benefits", buyer: "Freestone Insurance Group (Shore Capital)", ev: "n/d", note: "Employee-benefits brokerage and administration; competitor print", date: "8/25", type: "Add-on / LBO" },
+        { tgt: "Integral Consulting (now Integral National)", buyer: "Riccardi + Weaderhorn (majority partners)", ev: "n/d", note: "IME and peer-review platform; founder retains stake; rebrand", date: "8/25", type: "Majority Recap" },
+        { tgt: "Stella Health Insurance Agency", buyer: "Integrity", ev: "n/d", note: "LA-area Medicare IMO joins serial consolidator", date: "8/26", type: "Add-on" },
       ],
     },
     {
-      name: "Outpatient", deals: 2, share: 4.2, wow: 0, hot: false,
+      name: "Behavioral Health", deals: 1, share: 2.2, wow: -50, hot: false,
       detail: [
-        { tgt: "4 Minnesota Occupational Health centers", buyer: "Concentra", ev: "n/d", note: "Completed; eight MN centers post-close", date: "8/17", type: "Add-on" },
-        { tgt: "Evolution PT + True Sports PT", buyer: "O2 Investment Partners (platform)", ev: "n/d", note: "New PT/fitness/wellness platform, 40+ locations in seven states", date: "8/18", type: "Platform Formation" },
+        { tgt: "Headspace (via OrangeDot)", buyer: "Sword Health", ev: "n/d", note: "Healthcare Dealflow scoop via MA HPC filing; cash deal expected to close Sept 14; unreported elsewhere", date: "8/25", type: "Strategic Acquisition (pending)" },
       ],
     },
     {
-      name: "Health Plans & Payor", deals: 2, share: 4.2, wow: -33, hot: false,
+      name: "Suppliers & Logistics", deals: 1, share: 2.2, wow: -67, hot: false,
       detail: [
-        { tgt: "InformedDNA GTUM business unit", buyer: "Zyter (Infinite)", ev: "n/d", note: "Carve-out from Truehelm/QHP portfolio company; competitor sell-side print", date: "8/19", type: "Carve-out" },
-        { tgt: "Slate Financial", buyer: "Cresso Health (Cypress Ridge-backed)", ev: "n/d", note: "Medicare and health-insurance distribution partnership", date: "8/21", type: "Add-on" },
+        { tgt: "Activ Médical Disposable", buyer: "Attindas Hygiene Partners", ev: "n/d", note: "Binding agreement, pending approvals; France/Spain incontinence and disposables manufacturing", date: "8/26", type: "Strategic Acquisition (pending)" },
       ],
     },
     {
-      name: "Medical Technology", deals: 0, share: 0.0, wow: -100, hot: false,
+      name: "Medical Technology", deals: 1, share: 2.2, wow: null, hot: false,
       detail: [
+        { tgt: "Master Medical Equipment + ReNew Biomedical", buyer: "BPOC", ev: "n/d", note: "Sister companies, one investment; EMS/post-acute capital equipment and biomed service; competitor print", date: "8/24", type: "Growth / Platform" },
       ],
     },
     {
@@ -1563,138 +1592,145 @@ window.NEWSLETTER_DATA = {
     },
   ],
 
-  spark: [51, 44, 44, 47, 26, 69, 45, 42, 49, 54, 56, 48],
+  spark: [44, 44, 47, 26, 69, 45, 42, 49, 54, 56, 48, 45],
 
   news: [
     {
       tag: "M&A",
-      title: "Healthcare services PE deal count down 18.5% YoY as macro headwinds gust",
-      source: "PitchBook Q2 report (via BRG)",
-      briefDate: "Brief 8/17",
-      readTime: "6 min",
-      summary: "Healthcare services PE stayed under pressure in Q2 with deal count off 18.5% year over year on rates, softer utilization and regulatory scrutiny. PPMs continue to lag while ancillary and outsourced services (staffing, labs, ASCs) prove more resilient, and vision and fertility were the rare PPM bright spots. Useful sector-by-sector calibration against this week's tape.",
-      url: "https://pitchbook.com/news/reports/q2-2026-healthcare-services-report-gusting-macroeconomic-headwinds-impede-progress",
-      googleQuery: "PitchBook healthcare services report Q2 2026 deal count decline",
+      title: "Bain midyear: healthcare buyout value falls below H1 2025 even as volume edges higher",
+      source: "Bain & Company",
+      briefDate: "Brief 8/27",
+      readTime: "7 min",
+      summary: "Bain's 2026 midyear update finds global healthcare buyout value below the first half of 2025 as the AI-driven 'SaaSpocalypse,' the Iran war and private-credit redemption stress cooled momentum, while volume edged higher. Provider-related transaction value rose across care delivery and HCIT/tech services rather than on any single theme. The reference frame for everything else on this page.",
+      url: "https://www.bain.com/insights/navigating-uncertainty-healthcare-private-equity-2026-midyear-update-snap-chart/",
+      googleQuery: "Bain healthcare private equity 2026 midyear update",
+    },
+    {
+      tag: "SCOOP",
+      title: "Humana's $900M Gentiva stake sale slips to Q4; buyers identified as BlackRock and CD&R",
+      source: "Healthcare Dealflow",
+      briefDate: "Brief 8/24",
+      readTime: "4 min",
+      summary: "Humana pushed its $900M Gentiva stake sale to a Q4 close, and Healthcare Dealflow identified the unnamed 'consortium of investors' as BlackRock and Clayton, Dubilier & Rice via a Massachusetts HPC material-change filing, buyers not publicly named anywhere else. Hospice platform ownership is quietly institutionalizing at the largest scale.",
+      url: "https://healthcaredealflow.com/humana-pushes-back-gentiva-stake-sale-healthcare-dealflow-identifies-buyers/",
+      googleQuery: "Humana Gentiva stake sale BlackRock CD&R Q4",
     },
     {
       tag: "MACRO",
-      title: "Aon: employer healthcare costs to rise 9.5% in 2027, topping $19K per employee",
-      source: "Aon forecast (via BRG)",
-      briefDate: "Brief 8/20",
+      title: "No Surprises Act IDR costs hit $22.4B; Radiology Partners drives 30% of disputes",
+      source: "Fierce Healthcare (Georgetown CHIR)",
+      briefDate: "Brief 8/26",
+      readTime: "5 min",
+      summary: "Georgetown researchers tallied $22.4B in costs tied to the NSA's dispute-resolution process through 2025, $15.6B of it payments above in-network rates, with three filers accounting for nearly three-quarters of resolved disputes: Radiology Partners (30%), HaloMD (27%) and TeamHealth (20%). Arbitration has become a revenue strategy, and a concentrated one; see Portfolio Watch for the RP read.",
+      url: "https://www.fiercehealthcare.com/regulatory/costs-tied-no-surprises-acts-idr-process-hit-22b-2025-study-finds",
+      googleQuery: "No Surprises Act IDR costs 22 billion Georgetown study",
+    },
+    {
+      tag: "CAPITAL",
+      title: "Biotech IPO window widens: 21 IPOs raise $7.85B YTD, strongest since 2021",
+      source: "Mergermarket (ION Analytics)",
+      briefDate: "Brief 8/26",
+      readTime: "5 min",
+      summary: "Biotech public issuance has rebounded hard: 21 US IPOs raising $7.85B year to date, 289 follow-ons worth $33.35B, and a record $9.81B in converts, $51B of total issuance fueled by M&A takeouts resetting investor appetite. The exit path that repriced private biotech in 2022 is reopening; pairs with JATT III's close in Capital Formation.",
+      url: "https://ionanalytics.com/insights/mergermarket/biotech-ipo-window-widens-as-ma-fuels-2026-revival/",
+      googleQuery: "biotech IPO window 2026 Dealogic 7.85 billion",
+    },
+    {
+      tag: "RE",
+      title: "MOB investment sales surge 21% to $6.7B in H1 as cap rates compress to 6.8%",
+      source: "Connect CRE (Cushman & Wakefield)",
+      briefDate: "Brief 8/24",
       readTime: "4 min",
-      summary: "U.S. employer healthcare costs are set to climb 9.5% in 2027, a fourth straight year of near double-digit trend, pushing average cost above $19,000 per employee on utilization, chronic prevalence and high-cost drug claims. The employer affordability squeeze behind last week's HRA-adoption surge is accelerating, not easing.",
-      url: "https://www.reuters.com/legal/litigation/us-employer-healthcare-costs-set-rise-95-2027-aon-says-2026-08-20/",
-      googleQuery: "Aon employer healthcare costs 9.5 percent 2027",
-    },
-    {
-      tag: "TECH",
-      title: "Healthcare IT PE pacing past the 2021 record on AI-driven platforms",
-      source: "PitchBook HCIT update (via BRG)",
-      briefDate: "Brief 8/18",
-      readTime: "5 min",
-      summary: "H1 2026 healthcare IT deal activity is on pace to surpass the 2021 record, concentrated in AI-driven provider operations. The Ensemble growth investment and the $7.5B EGYM leveraged buyout headline investor conviction, with premium multiples accruing to businesses with native AI capabilities. Context for this week's Weave take-private and R1/Humata print.",
-      url: "https://pitchbook.com/news/reports/h1-2026-healthcare-it-pe-update-deal-counts-on-pace-to-surpass-2021-record",
-      googleQuery: "healthcare IT private equity 2026 record pace PitchBook",
-    },
-    {
-      tag: "STRATEGY",
-      title: "Wells Fargo: GLP-1s are forcing a strategic reset across healthcare",
-      source: "Wells Fargo report (via BRG)",
-      briefDate: "Brief 8/21",
-      readTime: "5 min",
-      summary: "GLP-1s are a growth engine for pharma and a cost shock for payers, and Wells Fargo argues they are quietly rewriting demand for a system built around obesity-related complications, with downstream effects on cardiology, chronic disease management and bariatric case mix. ASC operators already report rebuilding around ortho, spine and pain as bariatric volumes fade.",
-      url: "https://www.fiercehealthcare.com/providers/glp-1s-forcing-strategic-reset-across-healthcare-well-fargo-report",
-      googleQuery: "Wells Fargo GLP-1 strategic reset healthcare report",
-    },
-    {
-      tag: "DISTRESS",
-      title: "Nebraska rural emergency hospital files Chapter 9",
-      source: "Becker's (via BRG)",
-      briefDate: "Brief 8/20",
-      readTime: "3 min",
-      summary: "Garden County Health Services in Oshkosh, Neb. filed Chapter 9 bankruptcy months after converting to rural emergency hospital status, citing unsustainable legacy contracts from a former system affiliation. The REH designation was meant to be the lifeline for facilities like this; the filing is an early stress test of the model and a marker for rural credit risk.",
-      url: "https://www.beckershospitalreview.com/finance/nebraska-rural-emergency-hospital-files-for-chapter-9/",
-      googleQuery: "Garden County Health Services Chapter 9 rural emergency hospital",
+      summary: "Cushman & Wakefield clocked H1 2026 medical outpatient building volume at $6.7B, up 21% year over year, with cap rates down 35 bps to 6.8%, pricing at $368/sf, and portfolio trades more than doubling past $2.6B as the portfolio premium widened to 100 bps. Institutional conviction behind the weekly MOB tape in our Facilities column.",
+      url: "https://www.connectcre.com/stories/medical-outpatient-building-sales-surge-in-h1-2026/",
+      googleQuery: "Cushman Wakefield MOB sales H1 2026 6.7 billion",
     },
   ],
 
   portfolio: [
     {
-      tag: "SIDECAR",
-      title: "R1 acquires Humata Health, folding AI prior auth into Phare OS",
-      source: "R1 announcement (via BRG)",
-      url: "https://www.globenewswire.com/news-release/2026/08/18/3346895/0/en/r1-to-acquire-humata-health-enhancing-phare-os-with-ai-powered-prior-authorization-automation-and-payer-provider-collaboration.html",
-      summaryHTML: "<strong>Direct: Sidecar.</strong> R1 agreed to acquire Humata Health, a leader in AI-powered touchless prior authorization, embedding it in the Phare Operating System to automate the revenue cycle end to end. The largest RCM platform is buying its way into agentic automation, the fourth RCM consolidation print in four weeks, and the same sponsor-backed category momentum showed up in Ensemble's new-sponsor recapitalization this week.",
+      tag: "RADIOLOGY PARTNERS",
+      title: "Radiology Partners to acquire Everlight, forming a global teleradiology leader",
+      source: "BusinessWire",
+      url: "https://www.businesswire.com/news/home/20260825071887/en/Radiology-Partners-to-Acquire-Everlight-Radiology-Creating-a-Global-Leader-in-Teleradiology",
+      summaryHTML: "<strong>Direct: Radiology Partners.</strong> RP signed a definitive agreement for Everlight Radiology, combining the UK/Ireland/ANZ/South Africa teleradiology provider with its vRad unit to create a global follow-the-sun reading platform. The largest US radiology platform is exporting its model just as the Georgetown IDR study (see News) names RP the single biggest filer in surprise-billing arbitration; growth and regulatory surface area are expanding together.",
       watchList: true,
     },
     {
-      tag: "WELLVANA",
-      title: "CMS emerges as value-based care's engine as MA plans pull back",
-      source: "HHCN PAYER Summit (via BRG)",
-      url: "https://homehealthcarenews.com/2026/08/cms-emerges-as-value-based-cares-new-engine-as-medicare-advantage-plans-pull-back/",
-      summaryHTML: "<strong>Direct: Wellvana.</strong> Panelists at HHCN's PAYER Summit argued CMS is now driving value-based care growth more than Medicare Advantage, with federal models like HHVBP and TEAM creating the clearer paths to risk. For VBC enablement, the payer mix of growth is tilting toward CMMI-style programs, which favors platforms that can operationalize government models at scale.",
-      watchList: false,
-    },
-    {
-      tag: "ABRIDGE",
-      title: "Summa Health names eight General Catalyst companies for HATCo transformation",
-      source: "Becker's (via BRG)",
-      url: "https://www.beckershospitalreview.com/healthcare-information-technology/innovation/summa-health-to-partner-with-8-hatco-tech-companies-on-transformation/",
-      summaryHTML: "<strong>Direct: Abridge.</strong> Summa Health named the first eight vendors in its HATCo-led transformation, all General Catalyst-backed, including Hippocratic AI, Commure, Aidoc and Transcarent, linked through a Percepta-built command center. A whole-stack, single-sponsor distribution model for AI clinical tools is taking shape; it defines the competitive field and the channel dynamics Abridge sells into.",
+      tag: "SIDECAR",
+      title: "Savista acquires ABW Medical, extending RCM consolidation into ambulatory",
+      source: "Savista",
+      url: "https://www.savistarcm.com/insights/savista-acquires-abw-medical",
+      summaryHTML: "<strong>Direct: Sidecar.</strong> Savista bought ambulatory RCM specialist ABW Medical, an athenahealth-ecosystem preferred partner serving FQHCs, medical groups and virtual providers, the fifth straight week with an RCM consolidation print (EnableComp, R1/Humata, Ensemble's recap before it). The bid for revenue-cycle capability keeps broadening from acute into non-acute settings, exactly Sidecar's lane.",
       watchList: false,
     },
     {
       tag: "LOOKDEEP",
-      title: "DocGo to acquire tele-ICU and virtual nursing provider Hicuity Health",
-      source: "DocGo announcement (via BRG)",
-      url: "https://www.fiercehealthcare.com/finance/docgo-enters-definitive-agreement-acquire-virtual-care-provider-hicuity-health-assumes-52m",
-      summaryHTML: "<strong>Direct: LookDeep.</strong> DocGo agreed to acquire Hicuity Health, the high-acuity virtual care provider (tele-ICU, virtual nursing, telemetry monitoring) with roughly $65M of trailing revenue, assuming ~$52M of Perceptive-held debt. Inpatient virtual-care assets are trading at distressed-adjacent structures; a live comp-formation datapoint for hospital AI monitoring.",
+      title: "200+ organizations press CMS to shelve proposed remote-monitoring limits",
+      source: "Becker's",
+      url: "https://www.beckershospitalreview.com/legal-regulatory-issues/30-systems-hospitals-ask-cms-to-delay-proposed-remote-monitoring-policies/",
+      summaryHTML: "<strong>Direct: LookDeep.</strong> More than 200 organizations, including 30+ health systems, asked CMS to hold the 2027 PFS proposals limiting remote physiologic and therapeutic monitoring, warning of disruption for roughly one million Medicare beneficiaries. The reimbursement posture for virtual monitoring is being contested in the open; the outcome shapes budget headroom for adjacent inpatient video-AI monitoring purchases.",
+      watchList: false,
+    },
+    {
+      tag: "ABRIDGE",
+      title: "Epic's UGM positions AI as embedded orchestration across the record",
+      source: "Advisory Board",
+      url: "https://www.advisory.com/daily-briefing/2026/08/26/epic-ugm-ab-oi-ec",
+      summaryHTML: "<strong>Direct: Abridge.</strong> Epic used its user group meeting to frame AI as an embedded orchestration layer, agents, partnerships and workflows coordinated inside the record rather than bolted-on features. For ambient documentation vendors, the platform question sharpens: Epic as distribution channel and Epic as competitor are converging, which raises the value of independent clinical-AI franchises with direct health-system trust.",
       watchList: false,
     },
   ],
 
   policy: [
     {
-      agency: "STATE (OR)",
-      title: "Oregon's toughened HCMO rules take effect: higher fees, penalties, deal-timing requirements",
+      agency: "STATES",
+      title: "Eight states have tightened healthcare transaction review since January 1",
       impact: "HEADWIND",
-      note: "Amendments to Oregon's Health Care Market Oversight program took effect July 1, adding higher filing fees, new penalties and timing requirements to one of the country's few regimes with substantive approve/condition/disapprove power. OHA has evaluated 65 transactions and conditioned 15; several withdrew under comprehensive review. Price Oregon timelines into any West Coast process.",
-      briefDate: "Brief 8/17",
-      url: "https://www.lexology.com/library/detail.aspx?g=405cde50-2737-4a52-a5ff-d38a84d700e0",
-      googleQuery: "Oregon HCMO amendments 2026 healthcare transaction review",
+      note: "Bass Berry's session wrap counts eight states enacting new or expanded notice/approval regimes, mini-HSR requirements, CPOM restrictions and ownership-reporting rules in 2026, most expressly capturing PE, hedge funds, MSOs and REITs. Deal timelines need state-by-state notice math built in; penalties attach for noncompliance.",
+      briefDate: "Brief 8/24",
+      url: "https://bassberry.com/news/sessions-out-summary-of-state-health-care-transaction-legislative-updates-since-january-1-2026/",
+      googleQuery: "state healthcare transaction laws 2026 summary mini-HSR",
     },
     {
-      agency: "COURTS",
-      title: "Federal appellate court hands hospice a 'safe harbor' win on terminal-illness eligibility",
-      impact: "RULING",
-      note: "A federal appellate court ruled hospice providers get safe-harbor protection when they reasonably rely on clinical judgment that a patient is terminally ill, even if the patient outlives the prognosis or coverage is later questioned. A meaningful liability shield against eligibility-based clawbacks, landing the same week DOJ named hospice fraud an enforcement priority.",
-      briefDate: "Brief 8/19",
-      url: "https://www.mcknightshomecare.com/news/hospice-advocates-hail-appellate-courts-safe-harbor-decision/",
-      googleQuery: "hospice safe harbor appellate court ruling terminal illness 2026",
-    },
-    {
-      agency: "FDA",
-      title: "FDA floats evaluating AI-enabled devices like doctors, via competency-based review",
+      agency: "STATE (CA)",
+      title: "California floats penalties up to 125% of overspend above cost-growth targets",
       impact: "PROPOSAL",
-      note: "An FDA discussion paper shared with Axios proposes assessing generative AI-enabled medical devices through a competency-based approach modeled on how clinicians are evaluated, spanning pre-approval and postmarket oversight, with stakeholder comment invited. Early but consequential for AI device regulatory strategy and for underwriting clinical-AI platforms.",
-      briefDate: "Brief 8/18",
-      url: "https://www.axios.com/2026/08/18/fda-doctor-ai-medical-devices-review",
-      googleQuery: "FDA competency based approach AI medical devices discussion paper",
+      note: "The Office of Health Care Affordability is weighing fines of up to 125% of spending above the state's growth caps (3.5% last year, stepping to 3% by 2029) for hospitals, medical groups and insurers, potentially hundreds of millions of dollars. If adopted, the toughest state cost-containment enforcement in the country and a diligence line-item for any California-heavy asset.",
+      briefDate: "Brief 8/25",
+      url: "https://kffhealthnews.org/health-industry/high-healthcare-costs-hospitals-state-spending-limits-california-fines/",
+      googleQuery: "California OHCA penalties 125 percent spending targets",
     },
     {
-      agency: "DOJ",
-      title: "DOJ antitrust revives targeted Second Requests, reshaping biopharma merger review",
-      impact: "PROCESS",
-      note: "DOJ's Antitrust Division announced a return to targeted Second Request investigations with a model timing agreement to expedite HSR review. Counsel read it as a narrower, faster path for biopharma deals that engage early and scope discovery tightly. A process tailwind for the $5-15B bolt-on cadence strategics are running.",
-      briefDate: "Brief 8/17",
-      url: "https://www.bioxconomy.com/legal/doj-adopts-targeted-approach-to-biopharma-mergers",
-      googleQuery: "DOJ antitrust targeted second request biopharma merger review 2026",
+      agency: "FTC",
+      title: "FTC finalizes Ascension/Amsurg consent order with seven ASC divestitures",
+      impact: "RULING",
+      note: "The Commission's 2-0 final order resolves antitrust concerns in Ascension's $3.9B Amsurg acquisition, requiring divestiture of seven ASCs (six to SC Affiliates, one to Florida Gastroenterology Center). The marker: ASC roll-ups sit below HSR thresholds individually but are squarely reviewable in system-scale combinations.",
+      briefDate: "Brief 8/26",
+      url: "https://www.beckershospitalreview.com/legal-regulatory-issues/ascensions-amsurg-deal-faces-asc-acquisition-limits-under-ftc-order/",
+      googleQuery: "FTC final consent order Ascension Amsurg ASC divestitures",
+    },
+    {
+      agency: "CMS",
+      title: "CMS lets the DMEPOS enrollment moratorium lapse at six months",
+      impact: "TAILWIND",
+      note: "CMS ended the six-month freeze on new DMEPOS enrollments imposed in February to curb fraud, reopening the channel for suppliers. Providers expect the parallel home health and hospice enrollment moratorium, imposed in May, to be extended instead; the divergence signals where enforcement attention is actually concentrating.",
+      briefDate: "Brief 8/28",
+      url: "https://www.mcknightshomecare.com/news/cms-ends-six-month-moratorium-on-new-dmepos-enrollments/",
+      googleQuery: "CMS ends DMEPOS enrollment moratorium August 2026",
+    },
+    {
+      agency: "STATE (NC)",
+      title: "North Carolina eliminates dental board pre-review of management arrangements",
+      impact: "TAILWIND",
+      note: "S.L. 2026-41 removes the NC Board of Dental Examiners' longstanding requirement that dental management arrangements be submitted for review and compliance determination before execution, effective July 7. Holland & Knight reads it as a deregulatory counterpoint to the national CPOM-tightening trend; DSO transactions in NC lose a gating step.",
+      briefDate: "Brief 8/27",
+      url: "https://www.hklaw.com/en/insights/publications/2026/08/nc-dental-review-change-counters-tougher-national-trend",
+      googleQuery: "North Carolina dental management review eliminated 2026",
     },
   ],
 
   events: [
-    { name: "HHCN & HMEB FUTURE Conference", date: "Aug 26–28", loc: "Austin, TX", attend: false,
-      url: "https://hhcnfutureconference.com/2026-agenda/" },
     { name: "RISE West 2026", date: "Sep 2–4", loc: "San Diego, CA", attend: false,
       url: "https://west.risehealth.org/" },
     { name: "PBMI Annual National Conference", date: "Sep 10–11", loc: "Orlando, FL", attend: false,
@@ -1710,17 +1746,17 @@ window.NEWSLETTER_DATA = {
     { name: "Bass, Berry & Sims 10th Annual Pharmacy, Pharma Services & 340B Seminar", date: "Oct 1–2", loc: "Nashville, TN", attend: false, flag: "HOME",
       url: "https://bassberry.com/events/10th-annual-pharmacy-pharma-services-and-340b-seminar/" },
     { name: "Bass, Berry & Sims 16th Annual Health Care Investors Conference", date: "Oct 20", loc: "Nashville, TN", attend: false, flag: "HOME",
-      url: "https://bassberry.com/events/" },
+      url: "https://bassberry.com/events/16thannualhcic/" },
+    { name: "Reuters Events: Total Health 2026", date: "Oct 22–23", loc: "Nashville, TN", attend: false, flag: "HOME",
+      url: "https://events.reutersevents.com/1-total-health-homepage" },
   ],
 
   watchlist: [
-    { firm: "Rubicon Founders", hq: "Nashville, TN", reason: "Portfolio company Indigo (with Oak HC/FT) told PE Hub it is hunting med-mal tuck-ins, 80% focused on malpractice books, with backers open to larger, transformational deals. A hometown Highly Competitive firm signaling appetite.",
-      url: "https://rubiconfounders.com" },
-    { firm: "Oak HC/FT", hq: "Stamford, CT", reason: "Co-backer of Indigo's M&A push; separately participated in Rillet's $100M Series C on the fintech side of its mandate (non-healthcare, excluded from the deal count). Active across both sleeves.",
-      url: "https://www.oakhcft.com" },
-    { firm: "Truehelm", hq: "Bloomington, MN", reason: "Co-sponsor with QHP on InformedDNA, which completed its second business-unit divestiture this year (GTUM to Zyter, after May's Payment Integrity sale). Deliberate portfolio sharpening ahead of a likely DNAimpact story.",
-      url: "https://truehelm.com" },
-    { firm: "Vistria Group", hq: "Chicago, IL", reason: "Three prints in two weeks across two platforms (Daybright x2, now Risepoint/Keypath). The benefits-and-education services cadence is the fastest in the tracked set right now.",
+    { firm: "Flexpoint Ford", hq: "Chicago, IL", reason: "Sold specialty pharmacy platform ArtesRx to fellow tracked sponsor Linden after scaling it from 3 pharmacies in one state to 16 across 15, the set's first tracked-on-tracked trade, and a clean exit comp for pharmacy services.",
+      url: "https://flexpointford.com" },
+    { firm: "Petra Capital Partners", hq: "Nashville, TN", reason: "Printed outside healthcare this week (Royalty Roofing's Tingley add-on, with co-sponsors); excluded from the deal count per the non-healthcare rule, but a hometown Most Competitive firm deploying is worth the note.",
+      url: "https://www.petracapital.com" },
+    { firm: "Vistria Group", hq: "Chicago, IL", reason: "Quiet after three prints in two weeks (Daybright x2, Risepoint/Keypath). Watching whether the benefits-and-education cadence resumes or the platforms digest.",
       url: "https://vistria.com" },
   ],
 };
@@ -2329,7 +2365,7 @@ function Brief({ brief, meta, competitors, funds }) {
     e('h2', { className: 'section-title' },
       articleFor(adjective) + ' ', e('em', null, adjective), ' week — ',
       compCount, ' competitor ', pluralize(compCount, 'print'), ', ',
-      fundCount, ' fund ', pluralize(fundCount, 'close'), '.'),
+      fundCount, ' fund ', pluralize(fundCount, 'move'), '.'),
     (Array.isArray(brief) ? brief : [brief]).map((para, i) =>
       e('p', { key: i, className: 'brief-note', style: i > 0 ? { marginTop: 14, clear: 'both' } : null },
         i === 0 ? e('span', { className: 'drop' }, para[0]) : null,
@@ -2364,7 +2400,7 @@ function PulseSection({ pulse, spark, funds, meta }) {
       e('span', null, 'The Pulse'),
       e('span', { className: 'rule' }),
       e('span', { className: 'meta' },
-        window + ' · ' + fundCount + ' fund ' + pluralize(fundCount, 'close'))
+        window + ' · ' + fundCount + ' fund ' + pluralize(fundCount, 'move'))
     ),
     e('h2', { className: 'section-title' }, 'Healthcare PE, ', e('em', null, 'by the numbers')),
     e('div', { className: 'pulse' },
@@ -2404,7 +2440,7 @@ function CapitalFormation({ funds }) {
       : null;
   // Sum of dollar-denominated closes (everything that isn't a "Launch")
   const sumClosed = funds
-    .filter(f => f.size && f.size !== 'Launch')
+    .filter(f => f.size && f.size !== 'Launch' && !/target|in market|seeking/i.test(f.size))
     .reduce((acc, f) => {
       const m = String(f.size).match(/\$([\d.]+)\s*([KMB])/i);
       if (!m) return acc;
@@ -2429,8 +2465,8 @@ function CapitalFormation({ funds }) {
       funds.map((f, i) =>
         e('div', {
           key: i,
-          className: 'fund-card',
-          style: single ? { display: 'grid', gridTemplateColumns: 'auto auto 1fr auto', alignItems: 'baseline', columnGap: 18, padding: '14px 16px' } : null,
+          className: single ? 'fund-card fund-card--single' : 'fund-card',
+          style: single ? { display: 'grid', gridTemplateColumns: 'auto auto 1fr', alignItems: 'baseline', columnGap: 16, rowGap: 8, padding: '14px 16px' } : null,
         },
           e('div', { className: 'accent' }),
           e('div', { className: 'firm', style: single ? { whiteSpace: 'nowrap', marginBottom: 0 } : null },
@@ -2442,7 +2478,10 @@ function CapitalFormation({ funds }) {
               : f.size
           ),
           e('div', { className: 'name', style: single ? { marginTop: 0 } : null }, f.fund),
-          e('div', { className: 'note', style: single ? { marginTop: 0, textAlign: 'right' } : null }, f.date, ' · ', f.note)
+          single
+            ? e('div', { className: 'note', style: { marginTop: 0, gridColumn: '1 / -1', textAlign: 'left' } },
+                e('span', { className: 'fund-date' }, f.date), f.note)
+            : e('div', { className: 'note' }, f.date, ' · ', f.note)
         )
       )
     )
