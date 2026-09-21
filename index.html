@@ -2307,6 +2307,33 @@ function pluralize(n, singular, plural) {
   return n === 1 ? singular : (plural || singular + 's');
 }
 
+// Capital Formation eyebrow. Closes with a disclosed dollar size are summed; closes whose
+// size is undisclosed ("n/d", "CV", "Oversubscribed") are counted, not silently dropped;
+// raises still in market ("$450M target") contribute no closed dollars. The old caption
+// read "$0 announced + 0 launches" above two visible CV cards (Issue 22) because an
+// unparseable size added nothing to either number.
+function fundsCaption(funds) {
+  const parse = (s) => {
+    const m = /^\$([\d.]+)\s*([MB])/i.exec(s || '');
+    return m ? parseFloat(m[1]) * (m[2].toUpperCase() === 'B' ? 1000 : 1) : null;
+  };
+  let sized = 0, undisclosed = 0, launches = 0, inMarket = 0;
+  (funds || []).forEach((f) => {
+    const size = f.size || '';
+    if (size === 'Launch') { launches++; return; }
+    if (/target|in market|seeking/i.test(size)) { inMarket++; return; }
+    const v = parse(size);
+    if (v == null) undisclosed++; else sized += v;
+  });
+  const parts = [];
+  if (sized > 0) parts.push(sized >= 1000 ? '$' + (sized / 1000).toFixed(1).replace(/\.0$/, '') + 'B closed'
+                                          : '$' + Math.round(sized) + 'M closed');
+  if (undisclosed > 0) parts.push(undisclosed + ' close' + (undisclosed > 1 ? 's' : '') + ' undisclosed');
+  if (launches > 0) parts.push(launches + ' launch' + (launches > 1 ? 'es' : ''));
+  if (inMarket > 0) parts.push(inMarket + ' in market');
+  return parts.length ? parts.join(' + ') : 'No closes this week';
+}
+
 // "A" vs "An" based on the next word's starting sound. Simple vowel-letter
 // check; handles the common case (active, eventful, intense, off, ugly) and
 // gets a few edge cases wrong (e.g. "honest" should be "an" but starts with H).
@@ -2492,28 +2519,11 @@ function CapitalFormation({ funds }) {
     : count >= 2 && count <= 4
       ? { gridTemplateColumns: 'repeat(' + count + ', minmax(0, 1fr))' }
       : null;
-  // Sum of dollar-denominated closes (everything that isn't a "Launch")
-  const sumClosed = funds
-    .filter(f => f.size && f.size !== 'Launch' && !/target|in market|seeking/i.test(f.size))
-    .reduce((acc, f) => {
-      const m = String(f.size).match(/\$([\d.]+)\s*([KMB])/i);
-      if (!m) return acc;
-      const n = parseFloat(m[1]);
-      const mult = { K: 1e3, M: 1e6, B: 1e9 }[m[2].toUpperCase()] || 1;
-      return acc + n * mult;
-    }, 0);
-  let sumLabel;
-  if (sumClosed >= 1e9)      sumLabel = '$' + (sumClosed / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
-  else if (sumClosed >= 1e6) sumLabel = '$' + Math.round(sumClosed / 1e6) + 'M';
-  else if (sumClosed > 0)    sumLabel = '$' + Math.round(sumClosed / 1e3) + 'K';
-  else                       sumLabel = '$0';
-  const launchCount = funds.filter(f => f.size === 'Launch').length;
   return e('div', { style: { marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--line)' } },
     e('div', { className: 'eyebrow', style: { marginBottom: 0 } },
       e('span', null, 'Capital Formation'),
       e('span', { className: 'rule' }),
-      e('span', { className: 'meta' },
-        sumLabel + ' announced + ' + launchCount + ' ' + pluralize(launchCount, 'launch', 'launches'))
+      e('span', { className: 'meta' }, fundsCaption(funds))
     ),
     e('div', { className: 'funds-strip', style: stripStyle },
       funds.map((f, i) =>
